@@ -13,9 +13,6 @@ class FindWithCityName: UIViewController {
     @IBOutlet var searchButton: UIButton!
     var apiKey: String = ""
     
-    @IBAction func doSearch(_ sender: Any) {
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +24,21 @@ class FindWithCityName: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchHospital" {
+            if let controller = segue.destination as? HospitalController {
+                controller.key = apiKey
+                controller.cityName = cityName.text
+            }
+        }
+        else if segue.identifier == "searchPharmacy" {
+            if let controller = segue.destination as? PharmacyController {
+                controller.key = apiKey
+                controller.cityName = cityName.text
+            }
+        }
     }
 
     func checkCanSearch() -> Bool {
