@@ -12,6 +12,8 @@
 		77BB248020B962E6001F4564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BB247E20B962E6001F4564 /* Main.storyboard */; };
 		77BB248220B962E7001F4564 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77BB248120B962E7001F4564 /* Assets.xcassets */; };
 		77BB248520B962E7001F4564 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BB248320B962E7001F4564 /* LaunchScreen.storyboard */; };
+		77BB248D20B97502001F4564 /* FindWithCityName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB248C20B97502001F4564 /* FindWithCityName.swift */; };
+		77BB248F20B97A16001F4564 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77BB248E20B97A16001F4564 /* data.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		77BB248120B962E7001F4564 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77BB248420B962E7001F4564 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77BB248620B962E7001F4564 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77BB248C20B97502001F4564 /* FindWithCityName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWithCityName.swift; sourceTree = "<group>"; };
+		77BB248E20B97A16001F4564 /* data.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				77BB248120B962E7001F4564 /* Assets.xcassets */,
 				77BB248320B962E7001F4564 /* LaunchScreen.storyboard */,
 				77BB248620B962E7001F4564 /* Info.plist */,
+				77BB248C20B97502001F4564 /* FindWithCityName.swift */,
+				77BB248E20B97A16001F4564 /* data.plist */,
 			);
 			path = HalfOfYourLife;
 			sourceTree = "<group>";
@@ -124,6 +130,7 @@
 			files = (
 				77BB248520B962E7001F4564 /* LaunchScreen.storyboard in Resources */,
 				77BB248220B962E7001F4564 /* Assets.xcassets in Resources */,
+				77BB248F20B97A16001F4564 /* data.plist in Resources */,
 				77BB248020B962E6001F4564 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +144,7 @@
 			files = (
 				77BB247D20B962E6001F4564 /* ViewController.swift in Sources */,
 				77BB247B20B962E6001F4564 /* AppDelegate.swift in Sources */,
+				77BB248D20B97502001F4564 /* FindWithCityName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
