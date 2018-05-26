@@ -28,15 +28,19 @@ class FindWithCityName: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchHospital" {
-            if let controller = segue.destination as? HospitalController {
+            if let controller = segue.destination as? MedicalController {
                 controller.key = apiKey
                 controller.cityName = cityName.text
+                controller.url = "https://openapi.gg.go.kr/Animalhosptl?pSize=50&Type=xml"
+                controller.cellIdentifier = "HospitalCell"
             }
         }
         else if segue.identifier == "searchPharmacy" {
-            if let controller = segue.destination as? PharmacyController {
+            if let controller = segue.destination as? MedicalController {
                 controller.key = apiKey
                 controller.cityName = cityName.text
+                controller.url = "https://openapi.gg.go.kr/AnimalPharmacy?pSize=50&Type=xml"
+                controller.cellIdentifier = "PharmacyCell"
             }
         }
     }

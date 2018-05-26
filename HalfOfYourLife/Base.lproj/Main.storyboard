@@ -113,10 +113,10 @@
             </objects>
             <point key="canvasLocation" x="996" y="-382.75862068965517"/>
         </scene>
-        <!--Hospital Controller-->
+        <!--Medical Controller-->
         <scene sceneID="A78-9S-auk">
             <objects>
-                <tableViewController id="Efw-k7-JtG" customClass="HospitalController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Efw-k7-JtG" customClass="MedicalController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K0D-2t-dLO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,6 +165,34 @@
             </objects>
             <point key="canvasLocation" x="1831.2" y="-382.75862068965517"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="vqv-ei-EcV">
+            <objects>
+                <tableViewController id="wK5-4j-tux" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3j8-zk-9Yk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4mT-o6-4Z5">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4mT-o6-4Z5" id="Xfe-dS-beb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wK5-4j-tux" id="gux-rH-Sre"/>
+                            <outlet property="delegate" destination="wK5-4j-tux" id="QYx-A9-AjJ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hQh-8H-Nn7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2641" y="-385"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="4Nk-19-NCo">
             <objects>
@@ -200,10 +228,10 @@
             </objects>
             <point key="canvasLocation" x="996" y="1031.3343328335832"/>
         </scene>
-        <!--Pharmacy Controller-->
+        <!--Medical Controller-->
         <scene sceneID="5Yy-lh-Tdp">
             <objects>
-                <tableViewController id="gUf-Gm-rBs" customClass="PharmacyController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="gUf-Gm-rBs" customClass="MedicalController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nAV-Bb-XbR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

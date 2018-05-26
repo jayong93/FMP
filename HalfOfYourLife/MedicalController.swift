@@ -28,25 +28,29 @@ import UIKit
  16    REFINE_WGS84_LOGT    WGS84경도
  */
 
-class HospitalController: UITableViewController, XMLParserDelegate {
+class MedicalController: UITableViewController, XMLParserDelegate {
     @IBOutlet var dataTable: UITableView!
     var cityName: String?
     var key: String = ""
-    let url = "https://openapi.gg.go.kr/Animalhosptl?pSize=50&Type=xml"
-    let itemIdentifier = "row"
+    var url = ""
+    var cellIdentifier = ""
     var maxPage = 1
     var isInDataSection = false // row element를 만나면 true, 끝나면 false
     var hospitalList: [[String:String]] = []
     var currentData: [String:String] = [:]
     var currentElement: String?
     
+    let itemIdentifier = "row"
+    
     func search(page: Int) {
         let fullURL = url + "&KEY=\(key)&SIGUN_NM=\(cityName ?? "")&pIndex=\(page)"
-        let parser = XMLParser(contentsOf: URL(string: fullURL)!)
-        if let p = parser {
-            p.delegate = self
-            p.parse()
-            dataTable.reloadData()
+        let encodedURL = fullURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        if let url = encodedURL {
+            let parser = XMLParser(contentsOf: URL(string: url)!)
+            if let p = parser {
+                p.delegate = self
+                p.parse()
+            }
         }
     }
     
@@ -92,6 +96,7 @@ class HospitalController: UITableViewController, XMLParserDelegate {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         search(page:1)
+        dataTable.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,7 +117,7 @@ class HospitalController: UITableViewController, XMLParserDelegate {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HospitalCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
         cell.textLabel!.text = hospitalList[indexPath.row]["BIZPLC_NM"]
         cell.detailTextLabel!.text = hospitalList[indexPath.row]["REFINE_ROADNM_ADDR"]
@@ -131,9 +136,8 @@ class HospitalController: UITableViewController, XMLParserDelegate {
                 rows.append(IndexPath(row: i, section: 0))
             }
             
-            dataTable.beginUpdates()
-            dataTable.insertRows(at: rows, with: .automatic)
-            dataTable.endUpdates()
+            dataTable.reloadData()
+            dataTable.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)
         }
     }
 
