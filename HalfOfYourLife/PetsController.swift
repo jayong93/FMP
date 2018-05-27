@@ -146,6 +146,17 @@ class PetsController: UITableViewController, XMLParserDelegate {
 
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row+1 == petList.count {
+            let oldCount = petList.count
+            maxPage += 1
+            search(page: maxPage)
+            
+            tableView.reloadData()
+            tableView.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

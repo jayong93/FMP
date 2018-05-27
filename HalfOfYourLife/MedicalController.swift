@@ -156,11 +156,6 @@ class MedicalController: UITableViewController, XMLParserDelegate {
             maxPage += 1
             search(page: maxPage)
             
-            var rows: [IndexPath] = []
-            for i in oldCount..<hospitalList.count {
-                rows.append(IndexPath(row: i, section: 0))
-            }
-            
             dataTable.reloadData()
             dataTable.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)
         }

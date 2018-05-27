@@ -40,12 +40,14 @@ class CityListData: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
         if let towns = owner.getTownCodes(key: owner.apiKey, cityCode: cities[selectedRow].1) {
             if towns.count == 0 {
                 owner.townListView.isEnabled = false
+                owner.townListView.text = nil
                 owner.townListData = nil
                 owner.townPicker.delegate = nil
             } else {
                 owner.townListView.isEnabled = true
                 owner.townListData = TownListData(towns: towns, townList: owner.townListView)
                 owner.townPicker.delegate = owner.townListData!
+                owner.townListView.text = owner.townListData!.towns[0].0
             }
         }
     }
