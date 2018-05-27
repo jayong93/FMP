@@ -86,6 +86,21 @@ class MedicalController: UITableViewController, XMLParserDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cell = sender as? UITableViewCell{
+            if let index = tableView.indexPath(for: cell) {
+                if let controller = segue.destination as? MedicalDetailController {
+                    controller.data = hospitalList[index.row]
+                    if segue.identifier == "showHospitalDetail" {
+                        controller.cellIdentifier = "HospitalCell"
+                    } else {
+                        controller.cellIdentifier = "PharmacyCell"
+                    }
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,8 +135,18 @@ class MedicalController: UITableViewController, XMLParserDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
         cell.textLabel!.text = hospitalList[indexPath.row]["BIZPLC_NM"]
-        cell.detailTextLabel!.text = hospitalList[indexPath.row]["REFINE_ROADNM_ADDR"]
-
+        
+        if let addr = hospitalList[indexPath.row]["REFINE_ROADNM_ADDR"] {
+            if false == addr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                cell.detailTextLabel!.text = addr
+            }
+        }
+        if cell.detailTextLabel!.text == nil {
+            if let addr = hospitalList[indexPath.row]["REFINE_LOTNO_ADDR"] {
+                cell.detailTextLabel!.text = addr
+            }
+        }
+        
         return cell
     }
     

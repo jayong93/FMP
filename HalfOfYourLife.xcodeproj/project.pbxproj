@@ -15,6 +15,7 @@
 		77BB248D20B97502001F4564 /* FindWithCityName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB248C20B97502001F4564 /* FindWithCityName.swift */; };
 		77BB248F20B97A16001F4564 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77BB248E20B97A16001F4564 /* data.plist */; };
 		77BB249120B9810C001F4564 /* MedicalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB249020B9810C001F4564 /* MedicalController.swift */; };
+		77BB249520B9D056001F4564 /* MedicalDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB249420B9D056001F4564 /* MedicalDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		77BB248C20B97502001F4564 /* FindWithCityName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWithCityName.swift; sourceTree = "<group>"; };
 		77BB248E20B97A16001F4564 /* data.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 		77BB249020B9810C001F4564 /* MedicalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalController.swift; sourceTree = "<group>"; };
+		77BB249420B9D056001F4564 /* MedicalDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				77BB248C20B97502001F4564 /* FindWithCityName.swift */,
 				77BB248E20B97A16001F4564 /* data.plist */,
 				77BB249020B9810C001F4564 /* MedicalController.swift */,
+				77BB249420B9D056001F4564 /* MedicalDetailController.swift */,
 			);
 			path = HalfOfYourLife;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				77BB247B20B962E6001F4564 /* AppDelegate.swift in Sources */,
 				77BB248D20B97502001F4564 /* FindWithCityName.swift in Sources */,
 				77BB249120B9810C001F4564 /* MedicalController.swift in Sources */,
+				77BB249520B9D056001F4564 /* MedicalDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
