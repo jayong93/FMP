@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7724025B20BA603700BA39ED /* SearchPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724025A20BA603700BA39ED /* SearchPetController.swift */; };
+		7724025D20BA62B800BA39ED /* Parsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724025C20BA62B800BA39ED /* Parsers.swift */; };
 		77BB247B20B962E6001F4564 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB247A20B962E6001F4564 /* AppDelegate.swift */; };
 		77BB247D20B962E6001F4564 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB247C20B962E6001F4564 /* ViewController.swift */; };
 		77BB248020B962E6001F4564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BB247E20B962E6001F4564 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7724025A20BA603700BA39ED /* SearchPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPetController.swift; sourceTree = "<group>"; };
+		7724025C20BA62B800BA39ED /* Parsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsers.swift; sourceTree = "<group>"; };
 		77BB247720B962E6001F4564 /* HalfOfYourLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HalfOfYourLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BB247A20B962E6001F4564 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77BB247C20B962E6001F4564 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				77BB248E20B97A16001F4564 /* data.plist */,
 				77BB249020B9810C001F4564 /* MedicalController.swift */,
 				77BB249420B9D056001F4564 /* MedicalDetailController.swift */,
+				7724025A20BA603700BA39ED /* SearchPetController.swift */,
+				7724025C20BA62B800BA39ED /* Parsers.swift */,
 			);
 			path = HalfOfYourLife;
 			sourceTree = "<group>";
@@ -150,9 +156,11 @@
 			files = (
 				77BB247D20B962E6001F4564 /* ViewController.swift in Sources */,
 				77BB247B20B962E6001F4564 /* AppDelegate.swift in Sources */,
+				7724025D20BA62B800BA39ED /* Parsers.swift in Sources */,
 				77BB248D20B97502001F4564 /* FindWithCityName.swift in Sources */,
 				77BB249120B9810C001F4564 /* MedicalController.swift in Sources */,
 				77BB249520B9D056001F4564 /* MedicalDetailController.swift in Sources */,
+				7724025B20BA603700BA39ED /* SearchPetController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -240,18 +240,58 @@
         <!--Item3-->
         <scene sceneID="7Y0-fe-GB3">
             <objects>
-                <viewController id="3ML-k8-qZY" userLabel="Item3" sceneMemberID="viewController">
+                <viewController id="3ML-k8-qZY" userLabel="Item3" customClass="SearchPetController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QvQ-pZ-f2s">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvx-5o-BdM">
+                                <rect key="frame" x="150" y="163" width="167" height="30"/>
+                                <nil key="textColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSN-64-Rz1">
+                                <rect key="frame" x="71" y="168" width="30" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시군구" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGI-yw-BeY">
+                                <rect key="frame" x="65" y="226" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xgu-hW-Bqm">
+                                <rect key="frame" x="150" y="221" width="167" height="30"/>
+                                <nil key="textColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NGI-yw-BeY" firstAttribute="centerY" secondItem="Xgu-hW-Bqm" secondAttribute="centerY" id="01G-CB-VVX"/>
+                            <constraint firstItem="eSN-64-Rz1" firstAttribute="leading" secondItem="Inn-0B-EQ2" secondAttribute="leading" constant="71" id="3LY-Id-44k"/>
+                            <constraint firstItem="xvx-5o-BdM" firstAttribute="leading" secondItem="Xgu-hW-Bqm" secondAttribute="leading" id="4Wp-3M-fcq"/>
+                            <constraint firstItem="xvx-5o-BdM" firstAttribute="trailing" secondItem="Xgu-hW-Bqm" secondAttribute="trailing" id="HOT-QL-Nvb"/>
+                            <constraint firstItem="NGI-yw-BeY" firstAttribute="leading" secondItem="Inn-0B-EQ2" secondAttribute="leading" constant="65" id="U0B-bL-ag6"/>
+                            <constraint firstItem="xvx-5o-BdM" firstAttribute="top" secondItem="Inn-0B-EQ2" secondAttribute="top" constant="99" id="UUL-f2-X0O"/>
+                            <constraint firstItem="Xgu-hW-Bqm" firstAttribute="leading" secondItem="NGI-yw-BeY" secondAttribute="trailing" constant="40" id="XID-Sd-VNI"/>
+                            <constraint firstItem="Xgu-hW-Bqm" firstAttribute="top" secondItem="xvx-5o-BdM" secondAttribute="bottom" constant="28" id="cew-p1-dUX"/>
+                            <constraint firstItem="Inn-0B-EQ2" firstAttribute="trailing" secondItem="xvx-5o-BdM" secondAttribute="trailing" constant="58" id="kod-hD-Nrs"/>
+                            <constraint firstItem="eSN-64-Rz1" firstAttribute="centerY" secondItem="xvx-5o-BdM" secondAttribute="centerY" id="rkk-qB-fmj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Inn-0B-EQ2"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ar1-sS-Pyb"/>
+                    <connections>
+                        <outlet property="cityListView" destination="xvx-5o-BdM" id="J6L-vb-dmX"/>
+                        <outlet property="townListView" destination="Xgu-hW-Bqm" id="vIA-d0-fms"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="raW-Vs-u0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="1031.3343328335832"/>
+            <point key="canvasLocation" x="996" y="1030.4347826086957"/>
         </scene>
         <!--Medical Controller-->
         <scene sceneID="5Yy-lh-Tdp">
