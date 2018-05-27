@@ -100,12 +100,14 @@ class SearchPetController: UIViewController {
                 cityListData = CityListData(cities: cities, list: cityListView, owner: self)
                 cityPicker.delegate = self.cityListData
                 cityListView.inputView = cityPicker
+                cityListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.cityDonePressed))
                 cityListView.text = cities[0].0
                 
                 if let towns = getTownCodes(key: apiKey, cityCode: cities[cityListData!.selectedRow].1) {
                     townListData = TownListData(towns: towns, townList: townListView)
                     townPicker.delegate = self.townListData!
                     townListView.inputView = townPicker
+                    townListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.townDonePressed))
                     townListView.text = towns[0].0
                 }
             }
@@ -152,5 +154,23 @@ class SearchPetController: UIViewController {
             return sidoParser.sidoCodes
         }
         return nil
+    }
+    
+    func createToolBar(select: Selector) -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let flexBar = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: select)
+        toolBar.items = [flexBar, doneBtn]
+        return toolBar
+    }
+    
+    @objc func townDonePressed() {
+        townListView.resignFirstResponder()
+    }
+    
+    @objc func cityDonePressed() {
+        cityListView.resignFirstResponder()
     }
 }
