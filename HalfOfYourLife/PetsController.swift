@@ -51,6 +51,7 @@ class PetsController: UITableViewController, XMLParserDelegate {
     var petList: [[String:String]] = []
     var currentData: [String:String] = [:]
     var currentElement: String?
+    var noMoreData = false
     
     let baseURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?"
     let itemIdentifier = "item"
@@ -112,6 +113,12 @@ class PetsController: UITableViewController, XMLParserDelegate {
         if elementName == itemIdentifier {
             isInDataSection = false
             currentElement = nil
+            
+            if let state = currentData["processState"] {
+                if state.range(of: "종료") != nil || state.range(of: "입양") != nil {
+                    return
+                }
+            }
             petList.append(currentData)
         }
     }
@@ -148,10 +155,15 @@ class PetsController: UITableViewController, XMLParserDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row+1 == petList.count {
+        if false == noMoreData && indexPath.row+1 == petList.count {
             let oldCount = petList.count
             maxPage += 1
             search(page: maxPage)
+            
+            if oldCount == petList.count {
+                noMoreData = true
+                return
+            }
             
             tableView.reloadData()
             tableView.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)

@@ -39,6 +39,7 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     var hospitalList: [[String:String]] = []
     var currentData: [String:String] = [:]
     var currentElement: String?
+    var noMoreData = false
     
     let itemIdentifier = "row"
     
@@ -151,10 +152,15 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row+1 == hospitalList.count {
+        if false == noMoreData && indexPath.row+1 == hospitalList.count {
             let oldCount = hospitalList.count
             maxPage += 1
             search(page: maxPage)
+            
+            if oldCount == hospitalList.count {
+                noMoreData = true
+                return
+            }
             
             dataTable.reloadData()
             dataTable.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)
