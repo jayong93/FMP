@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class CityListData: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
     let cities: [(String, String)]
@@ -82,12 +83,17 @@ class TownListData: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
 class SearchPetController: UIViewController {
     @IBOutlet var cityListView: UITextField!
     @IBOutlet var townListView: UITextField!
+    @IBOutlet var searchStartDate: UITextField!
+    @IBOutlet var searchEndDate: UITextField!
+    @IBOutlet var searchBtn: UIButton!
     var apiKey = ""
     let baseURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/"
     var cityListData: CityListData?
     var cityPicker = UIPickerView()
     var townListData: TownListData?
     var townPicker = UIPickerView()
+    let startDatePicker = UIDatePicker()
+    let endDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,8 +117,20 @@ class SearchPetController: UIViewController {
                     townListView.text = towns[0].0
                 }
             }
+            
+            // 기간 선택
+            startDatePicker.datePickerMode = .date
+            endDatePicker.datePickerMode = .date
+            searchStartDate.inputView = startDatePicker
+            searchStartDate.inputAccessoryView = createToolBar(select: #selector(startDateDonePressed))
+            searchStartDate.text = formatDate(date: startDatePicker.date)
+            searchEndDate.inputView = endDatePicker
+            searchEndDate.inputAccessoryView = createToolBar(select: #selector(endDateDonePressed))
+            searchEndDate.text = formatDate(date: endDatePicker.date)
+            startDatePicker.addTarget(self, action: #selector(SearchPetController.startDateChanged), for: UIControlEvents.valueChanged)
+            endDatePicker.addTarget(self, action: #selector(SearchPetController.endDateChanged), for: UIControlEvents.valueChanged)
         } else {
-            // 검색 비활성화
+            searchBtn.isEnabled = false
         }
     }
 
@@ -172,5 +190,27 @@ class SearchPetController: UIViewController {
     
     @objc func cityDonePressed() {
         cityListView.resignFirstResponder()
+    }
+    
+    @objc func startDateDonePressed() {
+        searchStartDate.resignFirstResponder()
+    }
+    
+    @objc func endDateDonePressed() {
+        searchEndDate.resignFirstResponder()
+    }
+    
+    func formatDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter.string(from: date)
+    }
+    
+    @objc func startDateChanged(sender: UIDatePicker) {
+        searchStartDate.text = formatDate(date: sender.date)
+    }
+    
+    @objc func endDateChanged(sender: UIDatePicker) {
+        searchEndDate.text = formatDate(date: sender.date)
     }
 }
