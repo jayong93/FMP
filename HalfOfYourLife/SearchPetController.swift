@@ -139,6 +139,20 @@ class SearchPetController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchPets" {
+            if let controller = segue.destination as? PetsController {
+                controller.apiKey = apiKey
+                controller.startDate = searchStartDate.text!
+                controller.endDate = searchEndDate.text!
+                controller.cityCode = cityListData!.cities[cityListData!.selectedRow].1
+                if let townData = townListData {
+                    controller.townCode = townData.towns[townData.selectedRow].1
+                }
+            }
+        }
+    }
+    
     func getAPIKey() -> String? {
         if let path = Bundle.main.path(forResource: "data", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: path) {
