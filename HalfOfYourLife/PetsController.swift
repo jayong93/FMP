@@ -46,7 +46,9 @@ class PetsController: UITableViewController, XMLParserDelegate {
     var endDate = ""
     var cityCode = ""
     var townCode: String?
-    var maxPage = 1
+    var currPage = 1
+    var maxRowNumStr = ""
+    var maxRowNum = 0
     var isInDataSection = false // item element를 만나면 true, 끝나면 false
     var petList: [[String:String]] = []
     var petThumImgList: [UIImage?] = []
@@ -58,6 +60,7 @@ class PetsController: UITableViewController, XMLParserDelegate {
     let itemIdentifier = "item"
     let totalCntIdentifier = "totalCount"
     let cellIdentifier = "PetCell"
+    let rowNumOfPage = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +89,24 @@ class PetsController: UITableViewController, XMLParserDelegate {
     }
     
     func search(page: Int) {
-        var fullURL = baseURL + "&serviceKey=\(apiKey)&bgnde=\(startDate)&endde=\(endDate)&pageNo=\(page)&numOfRows=20"
+        searchWithStatus(page: page, state: "notice")
+        searchWithStatus(page: page, state: "protect")
+        // 동물들 이미지 불러오기
+        for i in petThumImgList.count..<petList.count {
+            if let imgURL = petList[i]["filename"] {
+                if let url = URL(string: imgURL) {
+                    if let imgData = try? Data(contentsOf: url) {
+                        petThumImgList.append(UIImage(data: imgData))
+                        continue
+                    }
+                }
+            }
+            petThumImgList.append(nil)
+        }
+    }
+    
+    private func searchWithStatus(page: Int, state: String) {
+        var fullURL = baseURL + "&serviceKey=\(apiKey)&bgnde=\(startDate)&endde=\(endDate)&pageNo=\(page)&numOfRows=\(rowNumOfPage)&state=\(state)"
         if let townCd = townCode {
             fullURL += "&org_cd=\(townCd)"
         } else {
@@ -96,19 +116,6 @@ class PetsController: UITableViewController, XMLParserDelegate {
         if let p = parser {
             p.delegate = self
             p.parse()
-            
-            // 동물들 이미지 불러오기
-            for i in petThumImgList.count..<petList.count {
-                if let imgURL = petList[i]["filename"] {
-                    if let url = URL(string: imgURL) {
-                        if let imgData = try? Data(contentsOf: url) {
-                            petThumImgList.append(UIImage(data: imgData))
-                            continue
-                        }
-                    }
-                }
-                petThumImgList.append(nil)
-            }
         }
     }
     
@@ -117,7 +124,8 @@ class PetsController: UITableViewController, XMLParserDelegate {
             isInDataSection = true
             currentData = [:]
         }
-        else if isInDataSection {
+        else if isInDataSection || elementName == totalCntIdentifier {
+            maxRowNumStr = ""
             currentElement = elementName
         }
     }
@@ -125,10 +133,15 @@ class PetsController: UITableViewController, XMLParserDelegate {
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if let element = currentElement {
             let string = string.trimmingCharacters(in: .whitespacesAndNewlines)
-            if let oldValue = currentData[element] {
-                currentData[element] = oldValue + string
-            } else {
-                currentData[element] = string
+            if isInDataSection {
+                if let oldValue = currentData[element] {
+                    currentData[element] = oldValue + string
+                } else {
+                    currentData[element] = string
+                }
+            }
+            else {
+                maxRowNumStr += string
             }
         }
     }
@@ -144,6 +157,10 @@ class PetsController: UITableViewController, XMLParserDelegate {
                 }
             }
             petList.append(currentData)
+        }
+        else if elementName == totalCntIdentifier {
+            currentElement = nil
+            maxRowNum = max(Int(maxRowNumStr)!, maxRowNum)
         }
     }
 
@@ -176,15 +193,10 @@ class PetsController: UITableViewController, XMLParserDelegate {
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-            if false == noMoreData {
+            if currPage * rowNumOfPage < maxRowNum {
                 let oldCount = petList.count
-                maxPage += 1
-                search(page: maxPage)
-                
-                if oldCount == petList.count {
-                    noMoreData = true
-                    return
-                }
+                currPage += 1
+                search(page: currPage)
                 
                 var newRows: [IndexPath] = []
                 for i in oldCount..<petList.count {

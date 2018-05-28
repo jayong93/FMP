@@ -34,7 +34,9 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     var key: String = ""
     var url = ""
     var cellIdentifier = ""
-    var maxPage = 1
+    var currPage = 1
+    var maxRowNumStr = ""
+    var maxRowNum = 0
     var isInDataSection = false // row element를 만나면 true, 끝나면 false
     var hospitalList: [[String:String]] = []
     var currentData: [String:String] = [:]
@@ -42,6 +44,7 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     var noMoreData = false
     
     let itemIdentifier = "row"
+    let totalCntIdentifier = "list_total_count"
     
     func search(page: Int) {
         let fullURL = url + "&KEY=\(key)&SIGUN_NM=\(cityName ?? "")&pIndex=\(page)"
@@ -60,7 +63,8 @@ class MedicalController: UITableViewController, XMLParserDelegate {
             isInDataSection = true
             currentData = [:]
         }
-        else if isInDataSection {
+        else if isInDataSection || elementName == totalCntIdentifier {
+            maxRowNumStr = ""
             currentElement = elementName
         }
     }
@@ -68,10 +72,15 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if let element = currentElement {
             let string = string.trimmingCharacters(in: .whitespacesAndNewlines)
-            if let oldValue = currentData[element] {
-                currentData[element] = oldValue + string
-            } else {
-                currentData[element] = string
+            if isInDataSection {
+                if let oldValue = currentData[element] {
+                    currentData[element] = oldValue + string
+                } else {
+                    currentData[element] = string
+                }
+            }
+            else {
+                maxRowNumStr += string
             }
         }
     }
@@ -84,6 +93,9 @@ class MedicalController: UITableViewController, XMLParserDelegate {
             if currentData["BSN_STATE_NM"] == "운영중" {
                 hospitalList.append(currentData)
             }
+        } else if elementName == totalCntIdentifier {
+            currentElement = nil
+            maxRowNum = Int(maxRowNumStr)!
         }
     }
     
@@ -158,8 +170,8 @@ class MedicalController: UITableViewController, XMLParserDelegate {
         if distanceFromBottom < height {
             if false == noMoreData {
                 let oldCount = hospitalList.count
-                maxPage += 1
-                search(page: maxPage)
+                currPage += 1
+                search(page: currPage)
                 
                 if oldCount == hospitalList.count {
                     noMoreData = true

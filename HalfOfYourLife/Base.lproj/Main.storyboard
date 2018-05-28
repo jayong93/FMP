@@ -569,6 +569,13 @@
                         <outlet property="petImage" destination="foS-Jm-2be" id="mef-Av-WMz"/>
                         <outlet property="raceLabel" destination="LBU-ck-5Y1" id="vMc-SH-6QZ"/>
                         <outlet property="weightLabel" destination="iRk-ly-aQ4" id="Saa-IB-Oj7"/>
+                        <outletCollection property="labels" destination="LBU-ck-5Y1" collectionClass="NSMutableArray" id="q3W-sC-nOK"/>
+                        <outletCollection property="labels" destination="uCZ-vO-xqo" collectionClass="NSMutableArray" id="ISF-F2-URK"/>
+                        <outletCollection property="labels" destination="iRk-ly-aQ4" collectionClass="NSMutableArray" id="AqF-iz-BRv"/>
+                        <outletCollection property="labels" destination="A5O-to-wid" collectionClass="NSMutableArray" id="OWh-vx-ZI0"/>
+                        <outletCollection property="labels" destination="SA1-2j-Wq4" collectionClass="NSMutableArray" id="RZ1-iq-Fxv"/>
+                        <outletCollection property="labels" destination="Y1S-pm-YUx" collectionClass="NSMutableArray" id="vtF-yt-BDe"/>
+                        <outletCollection property="labels" destination="bEa-4p-S9N" collectionClass="NSMutableArray" id="bfv-om-M9g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbx-oZ-aQr" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -50,11 +50,17 @@ class PetDetailController: UIViewController {
     @IBOutlet var foundLocLabel: UILabel!
     @IBOutlet var careLabel: UILabel!
     @IBOutlet var careNumLabel: UILabel!
+    @IBOutlet var labels: [UILabel]!
     
     var petData: [String:String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for label in labels {
+            label.adjustsFontSizeToFitWidth = true
+            label.minimumScaleFactor = 0.1
+        }
 
         if let imgStr = petData["popfile"] {
             if let imgURL = URL(string: imgStr) {
@@ -81,6 +87,51 @@ class PetDetailController: UIViewController {
             race += "(여)"
         }
         raceLabel.text = race
+        
+        if let age = petData["age"] {
+            ageLabel.text = "나이: \(age)"
+        } else {
+            ageLabel.text = "나이 알 수 없음."
+        }
+        
+        if let weight = petData["weight"] {
+            weightLabel.text = "체중: \(weight)"
+        } else {
+            weightLabel.text = nil
+        }
+        
+        let neutralized = petData["neuterYn"]
+        if neutralized == "Y" {
+            neutralizedLabel.text = "중성화 됨."
+        } else if neutralized == "N" {
+            neutralizedLabel.text = "중성화 되지 않음."
+        } else {
+            neutralizedLabel.text = nil
+        }
+        
+        if let foundPlace = petData["happenPlace"] {
+            foundLocLabel.text = "\(foundPlace) 에서 발견됨."
+        } else {
+            foundLocLabel.text = nil
+        }
+        
+        if let careAddr = petData["careAddr"] {
+            if let careName = petData["careNm"] {
+                careLabel.text = "\(careName)(\(careAddr)) 에서 보호 중."
+            } else {
+                careLabel.text = "\(careAddr) 에서 보호 중."
+            }
+        } else {
+            careLabel.text = nil
+        }
+        
+        if let careNum = petData["careTel"] {
+            careNumLabel.text = "연락처: \(careNum)"
+        } else if let officeNum = petData["officetel"] {
+            careNumLabel.text = "연락처: \(officeNum)"
+        } else {
+            careNumLabel.text = nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
