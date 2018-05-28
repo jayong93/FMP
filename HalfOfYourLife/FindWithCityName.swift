@@ -8,11 +8,14 @@
 
 import UIKit
 
-class FindWithCityName: UIViewController {
+class FindWithCityName: UIViewController, CityBase {
     @IBOutlet var cityName: UITextField!
     @IBOutlet var searchButton: UIButton!
     var cities: [City]!
+    var cityData: CityListData?
+    var townData: TownListData?
     var apiKey: String = ""
+    let cityPicker = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,17 @@ class FindWithCityName: UIViewController {
         if false == checkCanSearch() {
             searchButton.isEnabled = false
         }
+        
+        for city in cities {
+            if city.name == "경기도" {
+                townData = TownListData(owner: self, towns: city.towns)
+            }
+        }
+        
+        cityPicker.delegate = townData
+        cityName.inputView = cityPicker
+        cityName.inputAccessoryView = createToolBar(select: #selector(donePressed))
+        cityName.text = townData!.towns.first!.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,5 +70,27 @@ class FindWithCityName: UIViewController {
             }
         }
         return false
+    }
+    
+    func createToolBar(select: Selector) -> UIToolbar {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let flexBar = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: select)
+        toolBar.items = [flexBar, doneBtn]
+        return toolBar
+    }
+    
+    @objc func donePressed() {
+        cityName.resignFirstResponder()
+    }
+    
+    func citySelected(index: Int) {
+        
+    }
+    
+    func townSelected(index: Int) {
+        cityName.text = townData?.towns[index].name
     }
 }

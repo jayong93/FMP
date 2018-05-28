@@ -150,6 +150,7 @@ class MedicalController: UITableViewController, XMLParserDelegate {
 
         cell.textLabel!.text = hospitalList[indexPath.row]["BIZPLC_NM"]
         
+        cell.detailTextLabel!.text = nil
         if let addr = hospitalList[indexPath.row]["REFINE_ROADNM_ADDR"] {
             if false == addr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 cell.detailTextLabel!.text = addr

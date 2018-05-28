@@ -22,7 +22,9 @@ class MainController: UITabBarController {
                 for (name, code) in cityData {
                     if let townData = loadTownData(code){
                         let towns = townData.map({data in return Town(name: data.0, code: data.1)})
-                        locaData.append(City(name: name, code: code, towns: towns))
+                        locaData.append(City(name: name, code: code, towns: towns.filter({ data in
+                            return data.name != "용인시 기흥구"
+                        })))
                     }
                 }
             }

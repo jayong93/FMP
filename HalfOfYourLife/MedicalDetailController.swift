@@ -32,15 +32,18 @@ class MedicalDetailController: UITableViewController {
     var data: [String:String] = [:]
     var viewData: [(String, String)] = []
     var cellIdentifier: String = ""
-    let keyLabels = [("BIZPLC_NM", "사업장명"), ("LICENSG_DE", "인허가일자"), ("LOCPLC_AR", "소재지 면적"), ("TOT_EMPLY_CNT", "총종업원수"), ("REFINE_ROADNM_ADDR", "도로명 주소"), ("REFINE_ZIP_CD", "우편번호")]
+    let keyLabels = [("BIZPLC_NM", "사업장명"), ("LICENSG_DE", "인허가일자"), ("LOCPLC_AR", "소재지 면적(㎡)"), ("TOT_EMPLY_CNT", "총종업원수"), ("REFINE_ROADNM_ADDR", "도로명 주소"), ("REFINE_ZIP_CD", "우편번호")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         for (key, label) in keyLabels {
-            if let val = data[key] {
-                if false == val.isEmpty {
-                    viewData.append((label, val))
+            let val = data[key] ?? ""
+            if !val.isEmpty {
+                viewData.append((label, val))
+            } else if key == "REFINE_ROADNM_ADDR" {
+                if let addr = data["REFINE_LOTNO_ADDR"] {
+                    viewData.append(("지번 주소", addr))
                 }
             }
         }
