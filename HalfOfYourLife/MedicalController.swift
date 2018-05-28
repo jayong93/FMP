@@ -151,19 +151,30 @@ class MedicalController: UITableViewController, XMLParserDelegate {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if false == noMoreData && indexPath.row+1 == hospitalList.count {
-            let oldCount = hospitalList.count
-            maxPage += 1
-            search(page: maxPage)
-            
-            if oldCount == hospitalList.count {
-                noMoreData = true
-                return
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let  height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            if false == noMoreData {
+                let oldCount = hospitalList.count
+                maxPage += 1
+                search(page: maxPage)
+                
+                if oldCount == hospitalList.count {
+                    noMoreData = true
+                    return
+                }
+                
+                var newRows: [IndexPath] = []
+                for i in oldCount..<hospitalList.count {
+                    newRows.append(IndexPath(row: i, section: 0))
+                }
+                
+                if !newRows.isEmpty {
+                    tableView.insertRows(at: newRows, with: .bottom)
+                }
             }
-            
-            dataTable.reloadData()
-            dataTable.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)
         }
     }
 

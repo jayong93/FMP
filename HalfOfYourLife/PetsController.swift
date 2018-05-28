@@ -56,6 +56,7 @@ class PetsController: UITableViewController, XMLParserDelegate {
     
     let baseURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic?"
     let itemIdentifier = "item"
+    let totalCntIdentifier = "totalCount"
     let cellIdentifier = "PetCell"
     
     override func viewDidLoad() {
@@ -73,6 +74,15 @@ class PetsController: UITableViewController, XMLParserDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPetDetail" {
+            if let controller = segue.destination as? PetDetailController {
+                let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+                controller.petData = petList[indexPath!.row]
+            }
+        }
     }
     
     func search(page: Int) {
@@ -161,19 +171,30 @@ class PetsController: UITableViewController, XMLParserDelegate {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if false == noMoreData && indexPath.row+1 == petList.count {
-            let oldCount = petList.count
-            maxPage += 1
-            search(page: maxPage)
-            
-            if oldCount == petList.count {
-                noMoreData = true
-                return
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let  height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            if false == noMoreData {
+                let oldCount = petList.count
+                maxPage += 1
+                search(page: maxPage)
+                
+                if oldCount == petList.count {
+                    noMoreData = true
+                    return
+                }
+                
+                var newRows: [IndexPath] = []
+                for i in oldCount..<petList.count {
+                    newRows.append(IndexPath(row: i, section: 0))
+                }
+                
+                if !newRows.isEmpty {
+                    tableView.insertRows(at: newRows, with: .bottom)
+                }
             }
-            
-            tableView.reloadData()
-            tableView.scrollToRow(at: IndexPath(row: oldCount-1, section: 0), at: .bottom, animated: true)
         }
     }
 
