@@ -45,9 +45,10 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     
     let itemIdentifier = "row"
     let totalCntIdentifier = "list_total_count"
+    let rowNumOfPage = 100
     
     func search(page: Int) {
-        let fullURL = url + "&KEY=\(key)&SIGUN_NM=\(cityName ?? "")&pIndex=\(page)"
+        let fullURL = url + "&KEY=\(key)&SIGUN_NM=\(cityName ?? "")&pIndex=\(page)&pSize=\(rowNumOfPage)"
         let encodedURL = fullURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         if let url = encodedURL {
             let parser = XMLParser(contentsOf: URL(string: url)!)
@@ -168,15 +169,10 @@ class MedicalController: UITableViewController, XMLParserDelegate {
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height {
-            if false == noMoreData {
+            if currPage * rowNumOfPage < maxRowNum {
                 let oldCount = hospitalList.count
                 currPage += 1
                 search(page: currPage)
-                
-                if oldCount == hospitalList.count {
-                    noMoreData = true
-                    return
-                }
                 
                 var newRows: [IndexPath] = []
                 for i in oldCount..<hospitalList.count {
