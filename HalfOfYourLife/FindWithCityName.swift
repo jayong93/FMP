@@ -11,6 +11,7 @@ import UIKit
 class FindWithCityName: UIViewController {
     @IBOutlet var cityName: UITextField!
     @IBOutlet var searchButton: UIButton!
+    var cities: [City]!
     var apiKey: String = ""
     
     override func viewDidLoad() {

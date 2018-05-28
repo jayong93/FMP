@@ -10,14 +10,10 @@ import UIKit
 import Foundation
 
 class CityListData: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
-    let cities: [(String, String)]
     let owner: SearchPetController
-    var list: UITextField!
     var selectedRow = 0
     
-    init(cities: [(String, String)], list: UITextField!, owner: SearchPetController) {
-        self.cities = cities
-        self.list = list
+    init(owner: SearchPetController) {
         self.owner = owner
     }
     
@@ -26,41 +22,27 @@ class CityListData: NSObject, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.cities.count
+        return owner.cities.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return cities[row].0
+        return owner.cities[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        list.text = cities[row].0
         selectedRow = row
-        
-        if let towns = owner.getTownCodes(key: owner.apiKey, cityCode: cities[selectedRow].1) {
-            if towns.count == 0 {
-                owner.townListView.isEnabled = false
-                owner.townListView.text = nil
-                owner.townListData = nil
-                owner.townPicker.delegate = nil
-            } else {
-                owner.townListView.isEnabled = true
-                owner.townListData = TownListData(towns: towns, townList: owner.townListView)
-                owner.townPicker.delegate = owner.townListData!
-                owner.townListView.text = owner.townListData!.towns[0].0
-            }
-        }
+        owner.citySelected(index: selectedRow)
     }
 }
 
 class TownListData: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
-    let townList: UITextField!
-    let towns: [(String, String)]
+    let owner: SearchPetController
+    var towns: [Town]
     var selectedRow = 0
     
-    init(towns: [(String, String)], townList: UITextField!) {
+    init(owner: SearchPetController, towns: [Town]) {
+        self.owner = owner
         self.towns = towns
-        self.townList = townList
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -72,12 +54,12 @@ class TownListData: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return towns[row].0
+        return towns[row].name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        townList.text = towns[row].0
         selectedRow = row
+        owner.townSelected(index: selectedRow)
     }
 
 }
@@ -90,6 +72,7 @@ class SearchPetController: UIViewController {
     @IBOutlet var searchBtn: UIButton!
     var apiKey = ""
     let baseURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/"
+    var cities: [City]!
     var cityListData: CityListData?
     var cityPicker = UIPickerView()
     var townListData: TownListData?
@@ -104,21 +87,17 @@ class SearchPetController: UIViewController {
             apiKey = key
             
             // 시군구 목록 가져오기
-            if let cities = getCityCodes(key: apiKey) {
-                cityListData = CityListData(cities: cities, list: cityListView, owner: self)
-                cityPicker.delegate = self.cityListData
-                cityListView.inputView = cityPicker
-                cityListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.cityDonePressed))
-                cityListView.text = cities[0].0
-                
-                if let towns = getTownCodes(key: apiKey, cityCode: cities[cityListData!.selectedRow].1) {
-                    townListData = TownListData(towns: towns, townList: townListView)
-                    townPicker.delegate = self.townListData!
-                    townListView.inputView = townPicker
-                    townListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.townDonePressed))
-                    townListView.text = towns[0].0
-                }
-            }
+            cityListData = CityListData(owner: self)
+            cityPicker.delegate = self.cityListData
+            cityListView.inputView = cityPicker
+            cityListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.cityDonePressed))
+            cityListView.text = cities.first!.name
+            
+            townListData = TownListData(owner: self, towns: cities.first!.towns)
+            townPicker.delegate = self.townListData!
+            townListView.inputView = townPicker
+            townListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.townDonePressed))
+            townListView.text = cities.first!.towns.first!.name
             
             // 기간 선택
             startDatePicker.datePickerMode = .date
@@ -147,9 +126,9 @@ class SearchPetController: UIViewController {
                 controller.apiKey = apiKey
                 controller.startDate = searchStartDate.text!
                 controller.endDate = searchEndDate.text!
-                controller.cityCode = cityListData!.cities[cityListData!.selectedRow].1
+                controller.cityCode = cities[cityListData!.selectedRow].code
                 if let townData = townListData {
-                    controller.townCode = townData.towns[townData.selectedRow].1
+                    controller.townCode = townData.towns[townData.selectedRow].code
                 }
             }
         }
@@ -166,30 +145,6 @@ class SearchPetController: UIViewController {
         return nil
     }
     
-    func getCityCodes(key: String) -> [(String, String)]? {
-        let sidoURL = baseURL + "sido?serviceKey=\(key)"
-        let xmlParser = XMLParser(contentsOf: URL(string: sidoURL)!)
-        if let parser = xmlParser {
-            let sidoParser = SidoParser()
-            parser.delegate = sidoParser
-            parser.parse()
-            return sidoParser.sidoCodes
-        }
-        return nil
-    }
-    
-    func getTownCodes(key: String, cityCode: String) -> [(String, String)]? {
-        let sidoURL = baseURL + "sigungu?serviceKey=\(key)&upr_cd=\(cityCode)"
-        let xmlParser = XMLParser(contentsOf: URL(string: sidoURL)!)
-        if let parser = xmlParser {
-            let sidoParser = SidoParser()
-            parser.delegate = sidoParser
-            parser.parse()
-            return sidoParser.sidoCodes
-        }
-        return nil
-    }
-    
     func createToolBar(select: Selector) -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
@@ -198,6 +153,24 @@ class SearchPetController: UIViewController {
         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: select)
         toolBar.items = [flexBar, doneBtn]
         return toolBar
+    }
+    
+    func citySelected(index: Int) {
+        townListData?.towns = cities[index].towns
+        cityListView.text = cities[index].name
+        if let town = townListData?.towns.first {
+            townListView.isEnabled = true
+            townListView.text = town.name
+        } else {
+            townListView.isEnabled = false
+            townListView.text = nil
+        }
+    }
+    
+    func townSelected(index: Int) {
+        if let townData = townListData {
+            townListView.text = townData.towns[index].name
+        }
     }
     
     @objc func townDonePressed() {

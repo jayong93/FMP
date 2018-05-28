@@ -49,6 +49,7 @@ class PetsController: UITableViewController, XMLParserDelegate {
     var maxPage = 1
     var isInDataSection = false // item element를 만나면 true, 끝나면 false
     var petList: [[String:String]] = []
+    var petThumImgList: [UIImage?] = []
     var currentData: [String:String] = [:]
     var currentElement: String?
     var noMoreData = false
@@ -85,6 +86,19 @@ class PetsController: UITableViewController, XMLParserDelegate {
         if let p = parser {
             p.delegate = self
             p.parse()
+            
+            // 동물들 이미지 불러오기
+            for i in petThumImgList.count..<petList.count {
+                if let imgURL = petList[i]["filename"] {
+                    if let url = URL(string: imgURL) {
+                        if let imgData = try? Data(contentsOf: url) {
+                            petThumImgList.append(UIImage(data: imgData))
+                            continue
+                        }
+                    }
+                }
+                petThumImgList.append(nil)
+            }
         }
     }
     
@@ -140,14 +154,7 @@ class PetsController: UITableViewController, XMLParserDelegate {
 
         let data = petList[indexPath.row]
         
-        // 썸네일 로딩해서 표시
-        if let imgURL = data["filename"] {
-            if let url = URL(string: imgURL) {
-                if let imgData = try? Data(contentsOf: url) {
-                    cell.imageView?.image = UIImage(data: imgData)
-                }
-            }
-        }
+        cell.imageView?.image = petThumImgList[indexPath.row]
         cell.textLabel!.text = data["kindCd"]
         cell.detailTextLabel?.text = data["age"]
 
