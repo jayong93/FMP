@@ -11,162 +11,99 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--약국 검색-->
+        <!--약국-->
         <scene sceneID="vW0-BW-L6j">
             <objects>
-                <viewController id="nkp-2r-bb3" customClass="FindWithCityName" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="약국" id="nkp-2r-bb3" customClass="FindWithCityName" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fyJ-9L-bI1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N9l-af-amE">
-                                <rect key="frame" x="91" y="325.66666666666669" width="307" height="30"/>
+                                <rect key="frame" x="91" y="105" width="307" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEE-Im-plp">
+                                <rect key="frame" x="188.66666666666666" y="155" width="37" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="검색"/>
+                                <connections>
+                                    <action selector="search:" destination="nkp-2r-bb3" eventType="touchUpInside" id="a24-mB-rV6"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9yU-Bs-Zw6">
+                                <rect key="frame" x="0.0" y="201" width="414" height="486"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="RWo-v8-VDz">
+                                    <rect key="frame" x="0.0" y="72" width="414" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MedicalCell" textLabel="U6L-Bg-1i9" detailTextLabel="1RW-Di-emj" style="IBUITableViewCellStyleSubtitle" id="yRD-dC-p0b">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yRD-dC-p0b" id="Xf8-JM-HRa">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U6L-Bg-1i9">
+                                                    <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1RW-Di-emj">
+                                                    <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="jN9-H5-h9F" kind="show" identifier="showPharmacyDetail" id="IL5-98-C3v"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시군명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0Z-0W-0LH">
-                                <rect key="frame" x="16" y="326.66666666666669" width="60" height="28"/>
+                                <rect key="frame" x="16" y="106" width="60" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEE-Im-plp">
-                                <rect key="frame" x="188.66666666666666" y="395.66666666666669" width="37" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="검색"/>
-                                <connections>
-                                    <segue destination="gUf-Gm-rBs" kind="show" identifier="searchPharmacy" id="RVJ-XZ-DCe"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="N9l-af-amE" firstAttribute="top" secondItem="6et-Yf-BR0" secondAttribute="top" constant="41" id="DzC-JX-cKE"/>
                             <constraint firstItem="EEE-Im-plp" firstAttribute="centerX" secondItem="fyJ-9L-bI1" secondAttribute="centerX" id="Hwv-3b-Sd1"/>
+                            <constraint firstItem="EEE-Im-plp" firstAttribute="top" secondItem="N9l-af-amE" secondAttribute="bottom" constant="20" id="Qyh-dI-LoY"/>
+                            <constraint firstItem="9yU-Bs-Zw6" firstAttribute="leading" secondItem="6et-Yf-BR0" secondAttribute="leading" id="RNs-L7-XoS"/>
                             <constraint firstItem="6et-Yf-BR0" firstAttribute="trailing" secondItem="N9l-af-amE" secondAttribute="trailing" constant="16" id="YpA-Ib-rgW"/>
-                            <constraint firstItem="EEE-Im-plp" firstAttribute="top" secondItem="6et-Yf-BR0" secondAttribute="centerY" constant="20" id="YwK-9O-h4k"/>
                             <constraint firstItem="G0Z-0W-0LH" firstAttribute="centerY" secondItem="N9l-af-amE" secondAttribute="centerY" id="bMK-db-l9y"/>
-                            <constraint firstItem="6et-Yf-BR0" firstAttribute="centerY" secondItem="N9l-af-amE" secondAttribute="bottom" constant="20" id="eSP-nF-BOe"/>
                             <constraint firstItem="N9l-af-amE" firstAttribute="leading" secondItem="G0Z-0W-0LH" secondAttribute="trailing" constant="15" id="em6-w4-8Ts"/>
                             <constraint firstItem="G0Z-0W-0LH" firstAttribute="leading" secondItem="6et-Yf-BR0" secondAttribute="leading" constant="16" id="fDv-VI-aB7"/>
+                            <constraint firstItem="9yU-Bs-Zw6" firstAttribute="top" secondItem="EEE-Im-plp" secondAttribute="bottom" constant="8" id="nK4-sC-gSS"/>
+                            <constraint firstItem="6et-Yf-BR0" firstAttribute="bottom" secondItem="9yU-Bs-Zw6" secondAttribute="bottom" id="rhJ-1J-Erf"/>
+                            <constraint firstItem="6et-Yf-BR0" firstAttribute="trailing" secondItem="9yU-Bs-Zw6" secondAttribute="trailing" id="zFF-E4-KEF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6et-Yf-BR0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="약국 검색" id="70L-hd-bpX"/>
+                    <navigationItem key="navigationItem" title="약국" id="70L-hd-bpX"/>
                     <connections>
                         <outlet property="cityName" destination="N9l-af-amE" id="izN-M0-WwU"/>
                         <outlet property="searchButton" destination="EEE-Im-plp" id="YMA-eC-1Ja"/>
+                        <outlet property="tableView" destination="9yU-Bs-Zw6" id="xhY-z3-rmb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-AZ-deD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="996" y="284.70764617691157"/>
-        </scene>
-        <!--병원 검색-->
-        <scene sceneID="OJH-mU-UX4">
-            <objects>
-                <viewController id="CjQ-hr-g3Y" customClass="FindWithCityName" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="z9g-kK-got">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시군명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddF-QV-iwe">
-                                <rect key="frame" x="16" y="326.66666666666669" width="60" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4pK-Pw-E8c">
-                                <rect key="frame" x="91" y="325.66666666666669" width="307" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYZ-NG-1jv">
-                                <rect key="frame" x="188.66666666666666" y="395.66666666666669" width="37" height="38"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="검색"/>
-                                <connections>
-                                    <segue destination="Efw-k7-JtG" kind="show" identifier="searchHospital" id="6H4-br-tZI"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="zYZ-NG-1jv" firstAttribute="centerX" secondItem="z9g-kK-got" secondAttribute="centerX" id="7b4-cW-3Me"/>
-                            <constraint firstItem="SpG-ln-een" firstAttribute="trailing" secondItem="4pK-Pw-E8c" secondAttribute="trailing" constant="16" id="BSc-vI-w3y"/>
-                            <constraint firstItem="ddF-QV-iwe" firstAttribute="leading" secondItem="SpG-ln-een" secondAttribute="leading" constant="16" id="BzW-UE-bZM"/>
-                            <constraint firstItem="4pK-Pw-E8c" firstAttribute="leading" secondItem="ddF-QV-iwe" secondAttribute="trailing" constant="15" id="JJ3-8d-cYN"/>
-                            <constraint firstItem="SpG-ln-een" firstAttribute="centerY" secondItem="4pK-Pw-E8c" secondAttribute="bottom" constant="20" id="LcK-zf-CkG"/>
-                            <constraint firstItem="ddF-QV-iwe" firstAttribute="centerY" secondItem="4pK-Pw-E8c" secondAttribute="centerY" id="P5M-aO-LOO"/>
-                            <constraint firstItem="zYZ-NG-1jv" firstAttribute="top" secondItem="SpG-ln-een" secondAttribute="centerY" constant="20" id="ToG-0w-uFg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="SpG-ln-een"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="병원 검색" id="eON-fc-G1W"/>
-                    <connections>
-                        <outlet property="cityName" destination="4pK-Pw-E8c" id="xpD-Oe-0Cl"/>
-                        <outlet property="searchButton" destination="zYZ-NG-1jv" id="Qbq-Pg-0hJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LIJ-8d-uZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="996" y="-382.75862068965517"/>
-        </scene>
-        <!--Medical Controller-->
-        <scene sceneID="A78-9S-auk">
-            <objects>
-                <tableViewController id="Efw-k7-JtG" customClass="MedicalController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K0D-2t-dLO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="u9q-kv-x1m">
-                            <rect key="frame" x="0.0" y="72" width="414" height="0.0"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HospitalCell" textLabel="nPC-cJ-PcJ" detailTextLabel="L6C-bg-bDr" style="IBUITableViewCellStyleSubtitle" id="06O-tT-AY6">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="06O-tT-AY6" id="kA4-Af-NcV">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nPC-cJ-PcJ">
-                                            <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L6C-bg-bDr">
-                                            <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="wK5-4j-tux" kind="show" identifier="showHospitalDetail" id="aPH-5P-xPG"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Efw-k7-JtG" id="i4y-k5-CaS"/>
-                            <outlet property="delegate" destination="Efw-k7-JtG" id="2gP-Tr-8t7"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="dataTable" destination="K0D-2t-dLO" id="jfD-ZE-7Sg"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IBO-SJ-jsp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1831.2" y="-382.75862068965517"/>
         </scene>
         <!--Medical Detail Controller-->
         <scene sceneID="vqv-ei-EcV">
@@ -369,61 +306,6 @@
             </objects>
             <point key="canvasLocation" x="996" y="1030.4347826086957"/>
         </scene>
-        <!--Medical Controller-->
-        <scene sceneID="5Yy-lh-Tdp">
-            <objects>
-                <tableViewController id="gUf-Gm-rBs" customClass="MedicalController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nAV-Bb-XbR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="dig-18-Oac">
-                            <rect key="frame" x="0.0" y="72" width="414" height="0.0"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PharmacyCell" textLabel="cKa-Qc-cBQ" detailTextLabel="EBT-Mj-MT9" style="IBUITableViewCellStyleSubtitle" id="twr-gd-rJQ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="twr-gd-rJQ" id="DsU-Ja-15T">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cKa-Qc-cBQ">
-                                            <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EBT-Mj-MT9">
-                                            <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="jN9-H5-h9F" kind="show" identifier="showPharmacyDetail" id="GyI-Yd-Wvc"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="gUf-Gm-rBs" id="gXF-P4-HXm"/>
-                            <outlet property="delegate" destination="gUf-Gm-rBs" id="Afw-Cv-3Fv"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="dataTable" destination="nAV-Bb-XbR" id="gCR-LV-9Nf"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WDW-ff-h3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1831.2" y="284.70764617691157"/>
-        </scene>
         <!--Pets Controller-->
         <scene sceneID="pEF-hz-124">
             <objects>
@@ -599,7 +481,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="CjQ-hr-g3Y" kind="relationship" relationship="rootViewController" id="9ih-1x-NRF"/>
+                        <segue destination="fxc-QI-VbU" kind="relationship" relationship="rootViewController" id="VUs-5v-7qA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAX-IG-BDX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -693,6 +575,100 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3X-b2-McC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2641" y="285"/>
+        </scene>
+        <!--병원-->
+        <scene sceneID="gVH-Wh-xwV">
+            <objects>
+                <viewController title="병원" id="fxc-QI-VbU" customClass="FindWithCityName" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kjj-qb-gs7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="neT-HT-ERP">
+                                <rect key="frame" x="91" y="105" width="307" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-KV-GvT">
+                                <rect key="frame" x="188.66666666666666" y="155" width="37" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="검색"/>
+                                <connections>
+                                    <action selector="search:" destination="fxc-QI-VbU" eventType="touchUpInside" id="tO7-2b-GA0"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RBC-hv-wvN">
+                                <rect key="frame" x="0.0" y="201" width="414" height="486"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="gIw-2g-3ab">
+                                    <rect key="frame" x="0.0" y="72" width="414" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MedicalCell" textLabel="dF4-3h-8KE" detailTextLabel="NkZ-dV-jfE" style="IBUITableViewCellStyleSubtitle" id="Zeb-jC-5Xw">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zeb-jC-5Xw" id="c07-4y-yvN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dF4-3h-8KE">
+                                                    <rect key="frame" x="20.000000000000004" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NkZ-dV-jfE">
+                                                    <rect key="frame" x="19.999999999999996" y="25.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="wK5-4j-tux" kind="show" identifier="showHospitalDetail" id="MC5-fi-Gjv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="시군명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn9-mN-05O">
+                                <rect key="frame" x="16" y="106" width="60" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="L9h-AD-i6S" firstAttribute="trailing" secondItem="neT-HT-ERP" secondAttribute="trailing" constant="16" id="5Zf-ef-g51"/>
+                            <constraint firstItem="2VA-KV-GvT" firstAttribute="centerX" secondItem="kjj-qb-gs7" secondAttribute="centerX" id="H4P-uY-r8p"/>
+                            <constraint firstItem="RBC-hv-wvN" firstAttribute="leading" secondItem="L9h-AD-i6S" secondAttribute="leading" id="HOD-Bv-WOl"/>
+                            <constraint firstItem="L9h-AD-i6S" firstAttribute="trailing" secondItem="RBC-hv-wvN" secondAttribute="trailing" id="HnF-xx-Fwg"/>
+                            <constraint firstItem="RBC-hv-wvN" firstAttribute="top" secondItem="2VA-KV-GvT" secondAttribute="bottom" constant="8" id="MBO-lx-iyb"/>
+                            <constraint firstItem="neT-HT-ERP" firstAttribute="top" secondItem="L9h-AD-i6S" secondAttribute="top" constant="41" id="SA5-Uo-fA3"/>
+                            <constraint firstItem="gn9-mN-05O" firstAttribute="centerY" secondItem="neT-HT-ERP" secondAttribute="centerY" id="XAb-ff-A9O"/>
+                            <constraint firstItem="neT-HT-ERP" firstAttribute="leading" secondItem="gn9-mN-05O" secondAttribute="trailing" constant="15" id="pap-q8-4kJ"/>
+                            <constraint firstItem="L9h-AD-i6S" firstAttribute="bottom" secondItem="RBC-hv-wvN" secondAttribute="bottom" id="q3d-0p-Bmi"/>
+                            <constraint firstItem="2VA-KV-GvT" firstAttribute="top" secondItem="neT-HT-ERP" secondAttribute="bottom" constant="20" id="rCv-j3-9u8"/>
+                            <constraint firstItem="gn9-mN-05O" firstAttribute="leading" secondItem="L9h-AD-i6S" secondAttribute="leading" constant="16" id="z8n-pI-xjX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="L9h-AD-i6S"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="병원" id="BFd-6r-QZe"/>
+                    <connections>
+                        <outlet property="cityName" destination="neT-HT-ERP" id="Hpo-SW-1ET"/>
+                        <outlet property="searchButton" destination="2VA-KV-GvT" id="EYB-3c-Icb"/>
+                        <outlet property="tableView" destination="RBC-hv-wvN" id="KTG-M6-bEd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yYv-ZT-DoP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="-383"/>
         </scene>
     </scenes>
 </document>

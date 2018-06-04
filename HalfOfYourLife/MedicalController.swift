@@ -28,8 +28,7 @@ import UIKit
  16    REFINE_WGS84_LOGT    WGS84경도
  */
 
-class MedicalController: UITableViewController, XMLParserDelegate {
-    @IBOutlet var dataTable: UITableView!
+class MedicalController: NSObject, UITableViewDelegate, UITableViewDataSource, XMLParserDelegate {
     var cityName: String?
     var key: String = ""
     var url = ""
@@ -46,6 +45,18 @@ class MedicalController: UITableViewController, XMLParserDelegate {
     let itemIdentifier = "row"
     let totalCntIdentifier = "list_total_count"
     let rowNumOfPage = 100
+    let tableView: UITableView
+    
+    init(tableView: UITableView) {
+        self.tableView = tableView
+        super.init()
+    }
+    
+    func clearData() {
+        hospitalList = []
+        currentData = [:]
+        currentElement = nil
+    }
     
     func search(page: Int) {
         let fullURL = url + "&KEY=\(key)&SIGUN_NM=\(cityName ?? "")&pIndex=\(page)&pSize=\(rowNumOfPage)"
@@ -99,53 +110,20 @@ class MedicalController: UITableViewController, XMLParserDelegate {
             maxRowNum = Int(maxRowNumStr)!
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let cell = sender as? UITableViewCell{
-            if let index = tableView.indexPath(for: cell) {
-                if let controller = segue.destination as? MedicalDetailController {
-                    controller.data = hospitalList[index.row]
-                    if segue.identifier == "showHospitalDetail" {
-                        controller.cellIdentifier = "HospitalCell"
-                    } else {
-                        controller.cellIdentifier = "PharmacyCell"
-                    }
-                }
-            }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        search(page:1)
-        dataTable.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return hospitalList.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
         cell.textLabel!.text = hospitalList[indexPath.row]["BIZPLC_NM"]
@@ -165,7 +143,7 @@ class MedicalController: UITableViewController, XMLParserDelegate {
         return cell
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let  height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
