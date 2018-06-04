@@ -20,6 +20,8 @@ class FindWithCityName: UIViewController, CityBase {
     let cityPicker = UIPickerView()
     var medicalController: MedicalController!
     
+    @IBAction func doneToSearchView(segue: UIStoryboardSegue){}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,12 +77,14 @@ class FindWithCityName: UIViewController, CityBase {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell{
             if let index = tableView.indexPath(for: cell) {
-                if let controller = segue.destination as? MedicalDetailController {
-                    controller.data = medicalController.hospitalList[index.row]
-                    if segue.identifier == "showHospitalDetail" {
-                        controller.cellIdentifier = "HospitalCell"
-                    } else {
-                        controller.cellIdentifier = "PharmacyCell"
+                if let navController = segue.destination as? UINavigationController {
+                    if let controller = navController.topViewController as? MedicalDetailController{
+                        controller.data = medicalController.hospitalList[index.row]
+                        if segue.identifier == "showHospitalDetail" {
+                            controller.cellIdentifier = "HospitalCell"
+                        } else {
+                            controller.cellIdentifier = "PharmacyCell"
+                        }
                     }
                 }
             }

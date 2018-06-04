@@ -13,6 +13,8 @@
 		7724025B20BA603700BA39ED /* SearchPetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724025A20BA603700BA39ED /* SearchPetController.swift */; };
 		7724025D20BA62B800BA39ED /* Parsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724025C20BA62B800BA39ED /* Parsers.swift */; };
 		77950A2420BA95E800BFDA29 /* PetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77950A2320BA95E800BFDA29 /* PetsController.swift */; };
+		77A362D520C557110077B6DF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362D420C557110077B6DF /* MapViewController.swift */; };
+		77A362D720C55C870077B6DF /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362D620C55C870077B6DF /* MapAnnotation.swift */; };
 		77BB247B20B962E6001F4564 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB247A20B962E6001F4564 /* AppDelegate.swift */; };
 		77BB247D20B962E6001F4564 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB247C20B962E6001F4564 /* ViewController.swift */; };
 		77BB248020B962E6001F4564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77BB247E20B962E6001F4564 /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 		7724025A20BA603700BA39ED /* SearchPetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPetController.swift; sourceTree = "<group>"; };
 		7724025C20BA62B800BA39ED /* Parsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsers.swift; sourceTree = "<group>"; };
 		77950A2320BA95E800BFDA29 /* PetsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsController.swift; sourceTree = "<group>"; };
+		77A362D420C557110077B6DF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		77A362D620C55C870077B6DF /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		77BB247720B962E6001F4564 /* HalfOfYourLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HalfOfYourLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BB247A20B962E6001F4564 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77BB247C20B962E6001F4564 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				770AFB7C20BBA86D008D0549 /* MainController.swift */,
 				770AFB7E20BBAF07008D0549 /* CityData.swift */,
 				770AFB8020BBCD1B008D0549 /* PetDetailController.swift */,
+				77A362D420C557110077B6DF /* MapViewController.swift */,
+				77A362D620C55C870077B6DF /* MapAnnotation.swift */,
 			);
 			path = HalfOfYourLife;
 			sourceTree = "<group>";
@@ -173,6 +179,8 @@
 				77BB248D20B97502001F4564 /* FindWithCityName.swift in Sources */,
 				770AFB7D20BBA86D008D0549 /* MainController.swift in Sources */,
 				77BB249120B9810C001F4564 /* MedicalController.swift in Sources */,
+				77A362D720C55C870077B6DF /* MapAnnotation.swift in Sources */,
+				77A362D520C557110077B6DF /* MapViewController.swift in Sources */,
 				77BB249520B9D056001F4564 /* MedicalDetailController.swift in Sources */,
 				770AFB8120BBCD1B008D0549 /* PetDetailController.swift in Sources */,
 				7724025B20BA603700BA39ED /* SearchPetController.swift in Sources */,

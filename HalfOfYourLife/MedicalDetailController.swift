@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 /*
  결과 포맷
@@ -29,10 +30,15 @@ import UIKit
  */
 
 class MedicalDetailController: UITableViewController {
+    @IBOutlet var mapButton: UIBarButtonItem!
+    
     var data: [String:String] = [:]
     var viewData: [(String, String)] = []
     var cellIdentifier: String = ""
     let keyLabels = [("BIZPLC_NM", "사업장명"), ("LICENSG_DE", "인허가일자"), ("LOCPLC_AR", "소재지 면적(㎡)"), ("TOT_EMPLY_CNT", "총종업원수"), ("REFINE_ROADNM_ADDR", "도로명 주소"), ("REFINE_ZIP_CD", "우편번호")]
+    var medicalTitle: String?
+    var address: String?
+    var coordinate: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +51,23 @@ class MedicalDetailController: UITableViewController {
                 if let addr = data["REFINE_LOTNO_ADDR"] {
                     viewData.append(("지번 주소", addr))
                 }
+            }
+        }
+        
+        // 좌표 저장
+        let latStr = data["REFINE_WGS84_LAT"]
+        let lonStr = data["REFINE_WGS84_LOGT"]
+        
+        if latStr == nil || lonStr == nil {
+            mapButton.isEnabled = false
+        } else {
+            let lat = Double(latStr!)
+            let lon = Double(lonStr!)
+            
+            if lat == nil || lon == nil {
+                mapButton.isEnabled = false
+            } else {
+                coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: lon!)
             }
         }
     }
@@ -74,6 +97,16 @@ class MedicalDetailController: UITableViewController {
         cell.detailTextLabel!.adjustsFontSizeToFitWidth = true
         cell.detailTextLabel!.minimumScaleFactor = 0.2
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMapView" {
+            if let controller = segue.destination as? MapViewController {
+                let annotation = MapAnnotation(title: viewData[0].1, address: viewData[viewData.count-2].1, coordinate: coordinate!)
+                controller.mapAnnotations.append(annotation)
+                controller.initialLoca = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+            }
+        }
     }
 
     /*

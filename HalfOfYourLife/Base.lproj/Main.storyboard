@@ -66,7 +66,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="jN9-H5-h9F" kind="show" identifier="showPharmacyDetail" id="IL5-98-C3v"/>
+                                            <segue destination="PrL-ge-BHo" kind="show" identifier="showPharmacyDetail" id="IL5-98-C3v"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -150,10 +150,55 @@
                             <outlet property="delegate" destination="wK5-4j-tux" id="QYx-A9-AjJ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="7df-Xk-jZf">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="84G-yz-zbe">
+                            <connections>
+                                <segue destination="TfY-OQ-y7u" kind="unwind" unwindAction="doneToSearchViewWithSegue:" id="GyV-VZ-7Av"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="지도 보기" id="49K-Mz-gJe">
+                            <connections>
+                                <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="Xlg-MP-TaZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapButton" destination="49K-Mz-gJe" id="Nn0-L4-WlP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQh-8H-Nn7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="TfY-OQ-y7u" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2641" y="-385"/>
+            <point key="canvasLocation" x="3547.826086956522" y="-385.59782608695656"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="30U-fg-8nE">
+            <objects>
+                <viewController id="san-Yz-Q7A" customClass="MapViewController" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7n7-wJ-xSL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eg0-BU-E0J">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eg0-BU-E0J" firstAttribute="leading" secondItem="rTe-i1-kG3" secondAttribute="leading" id="KIC-oB-Tua"/>
+                            <constraint firstItem="rTe-i1-kG3" firstAttribute="bottom" secondItem="eg0-BU-E0J" secondAttribute="bottom" id="M4i-L5-BBK"/>
+                            <constraint firstItem="rTe-i1-kG3" firstAttribute="trailing" secondItem="eg0-BU-E0J" secondAttribute="trailing" id="cuZ-gg-7wd"/>
+                            <constraint firstItem="eg0-BU-E0J" firstAttribute="top" secondItem="rTe-i1-kG3" secondAttribute="top" id="gDT-Ye-PaC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rTe-i1-kG3"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="eg0-BU-E0J" id="B5H-9j-16e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Kg-0Q-64p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4481.159420289855" y="-388.04347826086962"/>
         </scene>
         <!--Main Controller-->
         <scene sceneID="4Nk-19-NCo">
@@ -571,10 +616,26 @@
                             <outlet property="delegate" destination="jN9-H5-h9F" id="fJB-Od-ND2"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="iDg-Fo-K9v">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="onp-AT-bD3">
+                            <connections>
+                                <segue destination="EUY-4V-WaX" kind="unwind" unwindAction="doneToSearchViewWithSegue:" id="v23-KI-9ui"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="지도 보기" id="OiZ-RG-q2q">
+                            <connections>
+                                <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="S20-cP-3eL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapButton" destination="OiZ-RG-q2q" id="HyG-t1-7Ej"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3X-b2-McC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EUY-4V-WaX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2641" y="285"/>
+            <point key="canvasLocation" x="3547.826086956522" y="284.51086956521743"/>
         </scene>
         <!--병원-->
         <scene sceneID="gVH-Wh-xwV">
@@ -631,7 +692,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="wK5-4j-tux" kind="show" identifier="showHospitalDetail" id="MC5-fi-Gjv"/>
+                                            <segue destination="Nem-IX-Wbv" kind="show" identifier="showHospitalDetail" id="MC5-fi-Gjv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -670,5 +731,44 @@
             </objects>
             <point key="canvasLocation" x="996" y="-383"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hyj-1B-Dh2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nem-IX-Wbv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ruW-di-qcn">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wK5-4j-tux" kind="relationship" relationship="rootViewController" id="DFL-Rp-W8O"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jOe-gE-eU7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2640.579710144928" y="-385.59782608695656"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bEh-8L-lmK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PrL-ge-BHo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kme-Cj-nRn">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jN9-H5-h9F" kind="relationship" relationship="rootViewController" id="15e-Eh-1Gb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OW1-eb-8VF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2640.579710144928" y="284.51086956521743"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xlg-MP-TaZ"/>
+    </inferredMetricsTieBreakers>
 </document>
