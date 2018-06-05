@@ -94,7 +94,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6et-Yf-BR0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="약국" id="70L-hd-bpX"/>
+                    <navigationItem key="navigationItem" title="약국" id="70L-hd-bpX">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="지도 보기" id="0K8-7r-Pwc">
+                            <connections>
+                                <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="iYt-FA-aCT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cityName" destination="N9l-af-amE" id="izN-M0-WwU"/>
                         <outlet property="searchButton" destination="EEE-Im-plp" id="YMA-eC-1Ja"/>
@@ -720,10 +726,17 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L9h-AD-i6S"/>
                     </view>
-                    <navigationItem key="navigationItem" title="병원" id="BFd-6r-QZe"/>
+                    <navigationItem key="navigationItem" title="병원" id="BFd-6r-QZe">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="지도 보기" id="qvt-gq-Ll4">
+                            <connections>
+                                <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="MWl-P7-hEE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cityName" destination="neT-HT-ERP" id="Hpo-SW-1ET"/>
                         <outlet property="searchButton" destination="2VA-KV-GvT" id="EYB-3c-Icb"/>
+                        <outlet property="showMapButton" destination="qvt-gq-Ll4" id="B9S-tU-rxt"/>
                         <outlet property="tableView" destination="RBC-hv-wvN" id="KTG-M6-bEd"/>
                     </connections>
                 </viewController>
@@ -769,6 +782,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="S20-cP-3eL"/>
+        <segue reference="MWl-P7-hEE"/>
     </inferredMetricsTieBreakers>
 </document>

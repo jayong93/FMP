@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
 class FindWithCityName: UIViewController, CityBase {
     @IBOutlet var cityName: UITextField!
     @IBOutlet var searchButton: UIButton!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var showMapButton: UIBarButtonItem!
     
     var cities: [City]!
     var cityData: CityListData?
@@ -70,24 +72,52 @@ class FindWithCityName: UIViewController, CityBase {
         medicalController.cityName = cityName.text
         medicalController.clearData()
         medicalController.search(page: medicalController.currPage)
+        if medicalController.hospitalList.isEmpty {
+            showMapButton.isEnabled = false
+        } else {
+            showMapButton.isEnabled = true
+        }
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let cell = sender as? UITableViewCell{
-            if let index = tableView.indexPath(for: cell) {
-                if let navController = segue.destination as? UINavigationController {
-                    if let controller = navController.topViewController as? MedicalDetailController{
-                        controller.data = medicalController.hospitalList[index.row]
-                        if segue.identifier == "showHospitalDetail" {
-                            controller.cellIdentifier = "HospitalCell"
-                        } else {
-                            controller.cellIdentifier = "PharmacyCell"
+        switch segue.identifier {
+        case "showHospitalDetail":
+            if let cell = sender as? UITableViewCell{
+                if let index = tableView.indexPath(for: cell) {
+                    if let navController = segue.destination as? UINavigationController {
+                        if let controller = navController.topViewController as? MedicalDetailController{
+                            controller.data = medicalController.hospitalList[index.row]
+                            if segue.identifier == "showHospitalDetail" {
+                                controller.cellIdentifier = "HospitalCell"
+                            } else {
+                                controller.cellIdentifier = "PharmacyCell"
+                            }
                         }
                     }
                 }
             }
+        case "showMapView":
+            if let controller = segue.destination as? MapViewController {
+                for data in medicalController.hospitalList {
+                    var address: String? = nil
+                    if let addr = data["REFINE_LOTNO_ADDR"] {
+                        address = addr
+                    } else if let addr = data["REFINE_ROADNM_ADDR"] {
+                        address = addr
+                    }
+                    
+                    if let anno = MapAnnotation.fromData(title: data["BIZPLC_NM"]!, address: address, lat: data["REFINE_WGS84_LAT"], lon: data["REFINE_WGS84_LOGT"]) {
+                        controller.mapAnnotations.append(anno)
+                    }
+                }
+                if let first = controller.mapAnnotations.first {
+                    controller.initialLoca = CLLocation(latitude: first.coordinate.latitude, longitude: first.coordinate.longitude)
+                }
+            }
+        default:
+            break
         }
     }
 

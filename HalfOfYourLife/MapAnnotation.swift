@@ -32,4 +32,16 @@ class MapAnnotation: NSObject, MKAnnotation {
         mapItem.name = title
         return mapItem
     }
+    
+    static func fromData(title: String, address:String?, lat: String?, lon: String?) -> MapAnnotation? {
+        if address == nil || lat == nil || lon == nil {
+            return nil
+        }
+        if let lat = Double(lat!) {
+            if let lon = Double(lon!) {
+                return MapAnnotation(title: title, address: address!, coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+            }
+        }
+        return nil
+    }
 }
