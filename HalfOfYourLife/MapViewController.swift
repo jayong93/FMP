@@ -56,4 +56,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         return view
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if let location = view.annotation as? MapAnnotation {
+            let launchOption = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving]
+            location.mapItem().openInMaps(launchOptions: launchOption)
+        }
+    }
 }
