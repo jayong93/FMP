@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2UD-yU-J2Y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2UD-yU-J2Y">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -104,6 +104,7 @@
                     <connections>
                         <outlet property="cityName" destination="N9l-af-amE" id="izN-M0-WwU"/>
                         <outlet property="searchButton" destination="EEE-Im-plp" id="YMA-eC-1Ja"/>
+                        <outlet property="showMapButton" destination="0K8-7r-Pwc" id="zjv-y2-Dyz"/>
                         <outlet property="tableView" destination="9yU-Bs-Zw6" id="xhY-z3-rmb"/>
                     </connections>
                 </viewController>
@@ -782,6 +783,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MWl-P7-hEE"/>
+        <segue reference="iYt-FA-aCT"/>
     </inferredMetricsTieBreakers>
 </document>
