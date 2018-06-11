@@ -32,6 +32,11 @@ class SearchPetController: UIViewController, CityBase {
         if let key = getAPIKey() {
             apiKey = key
             
+            // 전지역 entry 추가
+            var all_city: [City] = [City(name: "전지역", code: "", towns: [])]
+            all_city.append(contentsOf: cities)
+            cities = all_city
+            
             // 시군구 목록 가져오기
             cityData = CityListData(owner: self)
             cityPicker.delegate = self.cityData
@@ -43,7 +48,8 @@ class SearchPetController: UIViewController, CityBase {
             townPicker.delegate = self.townData!
             townListView.inputView = townPicker
             townListView.inputAccessoryView = createToolBar(select: #selector(SearchPetController.townDonePressed))
-            townListView.text = cities.first!.towns.first!.name
+            townListView.text = cities.first!.towns.first?.name
+            townListView.isEnabled = false
             
             // 기간 선택
             startDatePicker.datePickerMode = .date
@@ -74,7 +80,9 @@ class SearchPetController: UIViewController, CityBase {
                 controller.endDate = searchEndDate.text!
                 controller.cityCode = cities[cityData!.selectedRow].code
                 if let townData = townData {
-                    controller.townCode = townData.towns[townData.selectedRow].code
+                    if !townData.towns.isEmpty {
+                        controller.townCode = townData.towns[townData.selectedRow].code
+                    }
                 }
             }
         }
