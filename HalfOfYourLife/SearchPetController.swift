@@ -28,6 +28,8 @@ class SearchPetController: UIViewController, CityBase {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setBackground(path: "pet_background.png")
 
         if let key = getAPIKey() {
             apiKey = key
@@ -155,5 +157,20 @@ class SearchPetController: UIViewController, CityBase {
     
     @objc func endDateChanged(sender: UIDatePicker) {
         searchEndDate.text = formatDate(date: sender.date)
+    }
+    
+    func setBackground(path: String) {
+        if let bgImg = UIImage(named: path) {
+            let boundWidth = self.view.bounds.width
+            let boundHeight = self.view.frame.maxY - searchBtn.frame.maxY
+            
+            let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: boundWidth, height: boundHeight))
+            imgView.contentMode = .scaleAspectFit
+            imgView.clipsToBounds = true
+            imgView.image = bgImg
+            imgView.center = CGPoint(x: self.view.frame.midX, y: (self.view.frame.maxY + searchBtn.frame.minY)/2 - 20)
+            self.view.addSubview(imgView)
+            self.view.sendSubview(toBack: imgView)
+        }
     }
 }

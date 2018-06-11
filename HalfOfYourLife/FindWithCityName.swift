@@ -21,8 +21,8 @@ class FindWithCityName: UIViewController, CityBase {
     var apiKey: String = ""
     let cityPicker = UIPickerView()
     var medicalController: MedicalController!
-    
-    @IBAction func doneToSearchView(segue: UIStoryboardSegue){}
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+    var activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,7 @@ class FindWithCityName: UIViewController, CityBase {
     }
     
     @IBAction func search(_ sender: UIButton!) {
+        showWaitIcon()
         medicalController.cityName = cityName.text
         medicalController.clearData()
         medicalController.search(page: medicalController.currPage)
@@ -77,13 +78,16 @@ class FindWithCityName: UIViewController, CityBase {
         } else {
             showMapButton.isEnabled = true
         }
+        DispatchQueue.main.async {
+            self.effectView.removeFromSuperview()
+        }
         tableView.reloadData()
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showHospitalDetail":
+        case "showHospitalDetail", "showPharmacyDetail":
             if let cell = sender as? UITableViewCell{
                 if let index = tableView.indexPath(for: cell) {
                     if let navController = segue.destination as? UINavigationController {
@@ -154,4 +158,24 @@ class FindWithCityName: UIViewController, CityBase {
     func townSelected(index: Int) {
         cityName.text = townData?.towns[index].name
     }
+    
+    func showWaitIcon() {
+        effectView.frame = CGRect(x: self.view.center.x - 25, y: self.view.center.y-25, width: 50, height: 50)
+        effectView.layer.masksToBounds = true
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicator.startAnimating()
+        
+        effectView.contentView.addSubview(activityIndicator)
+        self.view.addSubview(effectView)
+    }
+}
+
+class FindHospital: FindWithCityName {
+    @IBAction func doneToHospitalSearchView(segue: UIStoryboardSegue){}
+}
+
+class FindPharmacy: FindWithCityName {
+    @IBAction func doneToPharmacySearchView(segue: UIStoryboardSegue){}
 }

@@ -119,13 +119,12 @@ class MedicalController: NSObject, UITableViewDelegate, UITableViewDataSource, X
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return hospitalList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-
+        
         cell.textLabel!.text = hospitalList[indexPath.row]["BIZPLC_NM"]
         
         cell.detailTextLabel!.text = nil
@@ -139,7 +138,6 @@ class MedicalController: NSObject, UITableViewDelegate, UITableViewDataSource, X
                 cell.detailTextLabel!.text = addr
             }
         }
-        
         return cell
     }
     

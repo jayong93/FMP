@@ -24,6 +24,10 @@
 		77BB248F20B97A16001F4564 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77BB248E20B97A16001F4564 /* data.plist */; };
 		77BB249120B9810C001F4564 /* MedicalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB249020B9810C001F4564 /* MedicalController.swift */; };
 		77BB249520B9D056001F4564 /* MedicalDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BB249420B9D056001F4564 /* MedicalDetailController.swift */; };
+		77EE43F620CECCF700771892 /* pet_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EE43F520CECCF700771892 /* pet_background.png */; };
+		77EE441920CEE5AA00771892 /* 병원.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EE441620CEE5AA00771892 /* 병원.png */; };
+		77EE441A20CEE5AA00771892 /* 약국.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EE441720CEE5AA00771892 /* 약국.png */; };
+		77EE441B20CEE5AA00771892 /* 동물.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EE441820CEE5AA00771892 /* 동물.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +50,10 @@
 		77BB248E20B97A16001F4564 /* data.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 		77BB249020B9810C001F4564 /* MedicalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalController.swift; sourceTree = "<group>"; };
 		77BB249420B9D056001F4564 /* MedicalDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDetailController.swift; sourceTree = "<group>"; };
+		77EE43F520CECCF700771892 /* pet_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pet_background.png; sourceTree = "<group>"; };
+		77EE441620CEE5AA00771892 /* 병원.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "병원.png"; sourceTree = "<group>"; };
+		77EE441720CEE5AA00771892 /* 약국.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "약국.png"; sourceTree = "<group>"; };
+		77EE441820CEE5AA00771892 /* 동물.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "동물.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +86,7 @@
 		77BB247920B962E6001F4564 /* HalfOfYourLife */ = {
 			isa = PBXGroup;
 			children = (
+				77EE43F720CEE17300771892 /* Resource */,
 				77BB247A20B962E6001F4564 /* AppDelegate.swift */,
 				77BB247C20B962E6001F4564 /* ViewController.swift */,
 				77BB247E20B962E6001F4564 /* Main.storyboard */,
@@ -98,6 +107,17 @@
 				77A362D620C55C870077B6DF /* MapAnnotation.swift */,
 			);
 			path = HalfOfYourLife;
+			sourceTree = "<group>";
+		};
+		77EE43F720CEE17300771892 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				77EE43F520CECCF700771892 /* pet_background.png */,
+				77EE441820CEE5AA00771892 /* 동물.png */,
+				77EE441620CEE5AA00771892 /* 병원.png */,
+				77EE441720CEE5AA00771892 /* 약국.png */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,10 +178,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77EE441B20CEE5AA00771892 /* 동물.png in Resources */,
 				77BB248520B962E7001F4564 /* LaunchScreen.storyboard in Resources */,
 				77BB248220B962E7001F4564 /* Assets.xcassets in Resources */,
+				77EE441920CEE5AA00771892 /* 병원.png in Resources */,
 				77BB248F20B97A16001F4564 /* data.plist in Resources */,
 				77BB248020B962E6001F4564 /* Main.storyboard in Resources */,
+				77EE441A20CEE5AA00771892 /* 약국.png in Resources */,
+				77EE43F620CECCF700771892 /* pet_background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +355,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33857PPM27;
 				INFOPLIST_FILE = HalfOfYourLife/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -349,6 +374,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33857PPM27;
 				INFOPLIST_FILE = HalfOfYourLife/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

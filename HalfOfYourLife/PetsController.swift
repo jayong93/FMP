@@ -61,6 +61,8 @@ class PetsController: UITableViewController, XMLParserDelegate {
     let totalCntIdentifier = "totalCount"
     let cellIdentifier = "PetCell"
     let rowNumOfPage = 20
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+    var activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +72,14 @@ class PetsController: UITableViewController, XMLParserDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        search(page: 1)
-        tableView.reloadData()
+        showWaitIcon()
+        DispatchQueue.main.async {
+            self.search(page: 1)
+            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.effectView.removeFromSuperview()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -208,6 +216,19 @@ class PetsController: UITableViewController, XMLParserDelegate {
                 }
             }
         }
+    }
+    
+    func showWaitIcon() {
+        effectView.frame = CGRect(x: self.view.center.x - 25, y: self.view.center.y-25, width: 50, height: 50)
+        effectView.layer.masksToBounds = true
+        effectView.layer.cornerRadius = 15
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.startAnimating()
+        
+        effectView.contentView.addSubview(activityIndicator)
+        self.view.addSubview(effectView)
     }
 
     /*

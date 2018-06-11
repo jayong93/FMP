@@ -14,7 +14,7 @@
         <!--약국-->
         <scene sceneID="vW0-BW-L6j">
             <objects>
-                <viewController title="약국" id="nkp-2r-bb3" customClass="FindWithCityName" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="약국" id="nkp-2r-bb3" customClass="FindPharmacy" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fyJ-9L-bI1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,7 +94,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6et-Yf-BR0"/>
                     </view>
-                    <navigationItem key="navigationItem" title="약국" id="70L-hd-bpX">
+                    <navigationItem key="navigationItem" title="동물 약국" id="70L-hd-bpX">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="지도 보기" id="0K8-7r-Pwc">
                             <connections>
                                 <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="iYt-FA-aCT"/>
@@ -160,7 +160,7 @@
                     <navigationItem key="navigationItem" id="7df-Xk-jZf">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="84G-yz-zbe">
                             <connections>
-                                <segue destination="TfY-OQ-y7u" kind="unwind" unwindAction="doneToSearchViewWithSegue:" id="GyV-VZ-7Av"/>
+                                <segue destination="TfY-OQ-y7u" kind="unwind" unwindAction="doneToHospitalSearchViewWithSegue:" id="GyV-VZ-7Av"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="지도 보기" id="49K-Mz-gJe">
@@ -282,23 +282,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지역" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJn-N5-Am8">
-                                <rect key="frame" x="185" y="94" width="44" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="53X-Mu-r6q"/>
-                                    <constraint firstAttribute="height" constant="30" id="XPh-tX-QSZ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="d3u-kI-xih"/>
-                                    <constraint firstAttribute="width" constant="44" id="r5b-gJ-6VZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="기간" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXM-Hv-xbe">
-                                <rect key="frame" x="184.66666666666666" y="241" width="44" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유기 날짜" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXM-Hv-xbe">
+                                <rect key="frame" x="161" y="241" width="92" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="UGQ-dg-Yl8"/>
-                                    <constraint firstAttribute="width" constant="44" id="nlh-rR-jNv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
@@ -307,11 +294,21 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBs-bt-Tu3">
                                 <rect key="frame" x="189.66666666666666" y="402" width="35" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="검색"/>
+                                <state key="normal" title="찾기"/>
                                 <connections>
                                     <segue destination="Zqw-ZU-bkw" kind="show" identifier="searchPets" id="LqX-W1-dQb"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유기 지역" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJn-N5-Am8">
+                                <rect key="frame" x="161.66666666666666" y="94" width="92" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="53X-Mu-r6q"/>
+                                    <constraint firstAttribute="height" constant="30" id="XPh-tX-QSZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -335,7 +332,6 @@
                             <constraint firstItem="xvx-5o-BdM" firstAttribute="top" secondItem="JJn-N5-Am8" secondAttribute="bottom" constant="16" id="lrB-a0-u8f"/>
                             <constraint firstItem="Inn-0B-EQ2" firstAttribute="trailing" secondItem="xvx-5o-BdM" secondAttribute="trailing" constant="40" id="mIc-io-OFE"/>
                             <constraint firstItem="Sd9-5a-yad" firstAttribute="centerX" secondItem="NGI-yw-BeY" secondAttribute="centerX" id="ogy-4a-Cjb"/>
-                            <constraint firstItem="dXM-Hv-xbe" firstAttribute="width" secondItem="JJn-N5-Am8" secondAttribute="width" id="rC4-ld-b7A"/>
                             <constraint firstItem="JJn-N5-Am8" firstAttribute="centerX" secondItem="QvQ-pZ-f2s" secondAttribute="centerX" id="rfU-3T-r8c"/>
                             <constraint firstItem="4zn-dp-sGG" firstAttribute="width" secondItem="una-bY-Y9L" secondAttribute="width" id="tCb-r3-9Cn"/>
                             <constraint firstItem="tUF-qA-Rvp" firstAttribute="centerY" secondItem="4zn-dp-sGG" secondAttribute="centerY" id="tHa-6I-v2D"/>
@@ -345,7 +341,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Inn-0B-EQ2"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ar1-sS-Pyb"/>
+                    <navigationItem key="navigationItem" title="유기동물 찾기" id="Ar1-sS-Pyb"/>
                     <connections>
                         <outlet property="cityListView" destination="xvx-5o-BdM" id="J6L-vb-dmX"/>
                         <outlet property="searchBtn" destination="CBs-bt-Tu3" id="moX-rZ-oPq"/>
@@ -356,7 +352,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="raW-Vs-u0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="1030.4347826086957"/>
+            <point key="canvasLocation" x="995.65217391304361" y="1030.4347826086957"/>
         </scene>
         <!--Pets Controller-->
         <scene sceneID="pEF-hz-124">
@@ -525,7 +521,7 @@
         <scene sceneID="dRo-KP-MAY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5NJ-oM-135" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="병원" id="CiK-aY-CRK"/>
+                    <tabBarItem key="tabBarItem" title="병원" image="병원.png" id="CiK-aY-CRK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Tqa-Fx-pNr">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -544,7 +540,7 @@
         <scene sceneID="UFr-kS-7Gv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LgR-aY-5ax" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="약국" id="SJ1-QP-5im"/>
+                    <tabBarItem key="tabBarItem" title="약국" image="약국.png" id="SJ1-QP-5im"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kdW-J2-U8L">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -563,7 +559,7 @@
         <scene sceneID="Mc1-dS-hwE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iwv-D9-7QX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="입양" id="jVS-bC-bwk"/>
+                    <tabBarItem key="tabBarItem" title="입양" image="동물.png" id="jVS-bC-bwk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pmJ-IA-66M">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -626,7 +622,7 @@
                     <navigationItem key="navigationItem" id="iDg-Fo-K9v">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="onp-AT-bD3">
                             <connections>
-                                <segue destination="EUY-4V-WaX" kind="unwind" unwindAction="doneToSearchViewWithSegue:" id="v23-KI-9ui"/>
+                                <segue destination="EUY-4V-WaX" kind="unwind" unwindAction="doneToPharmacySearchViewWithSegue:" id="v23-KI-9ui"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="지도 보기" id="OiZ-RG-q2q">
@@ -647,7 +643,7 @@
         <!--병원-->
         <scene sceneID="gVH-Wh-xwV">
             <objects>
-                <viewController title="병원" id="fxc-QI-VbU" customClass="FindWithCityName" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="병원" id="fxc-QI-VbU" customClass="FindHospital" customModule="HalfOfYourLife" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kjj-qb-gs7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -727,7 +723,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L9h-AD-i6S"/>
                     </view>
-                    <navigationItem key="navigationItem" title="병원" id="BFd-6r-QZe">
+                    <navigationItem key="navigationItem" title="동물 병원" id="BFd-6r-QZe">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="지도 보기" id="qvt-gq-Ll4">
                             <connections>
                                 <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="MWl-P7-hEE"/>
@@ -782,6 +778,11 @@
             <point key="canvasLocation" x="1830" y="289"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="동물.png" width="24" height="24"/>
+        <image name="병원.png" width="24" height="24"/>
+        <image name="약국.png" width="24" height="24"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iYt-FA-aCT"/>
     </inferredMetricsTieBreakers>
