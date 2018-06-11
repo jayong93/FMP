@@ -66,6 +66,8 @@ class PetDetailController: UIViewController {
             if let imgURL = URL(string: imgStr) {
                 if let data = try? Data(contentsOf: imgURL) {
                     petImage.image = UIImage(data: data)
+                    petImage.autoresizingMask = [.flexibleBottomMargin, .flexibleTopMargin,.flexibleLeftMargin,.flexibleRightMargin,.flexibleHeight,.flexibleWidth]
+                    petImage.contentMode = .scaleAspectFit
                 }
             }
         }
