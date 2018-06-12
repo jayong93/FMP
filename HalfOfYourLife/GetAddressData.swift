@@ -40,7 +40,7 @@ class AddressModule {
     
     func getAddressData(coord: CLLocationCoordinate2D) -> AddressData? {
         let requestURL = "https://sgisapi.kostat.go.kr/OpenAPI3/addr/rgeocode.json?"
-        guard let transcoord = changeCoordForm(coord: coord) else {return nil}
+        guard let transcoord = changeCoordWGSToUTM(coord: coord) else {return nil}
         let fullURL = requestURL + "accessToken=\(accessToken)&x_coor=\(transcoord.x)&y_coor=\(transcoord.y)"
         
         guard
@@ -53,18 +53,48 @@ class AddressModule {
         return AddressData(sidoName: sidoName, sigunguName: sigunguName)
     }
     
-    func changeCoordForm(coord: CLLocationCoordinate2D) -> (x: Double, y: Double)? {
+    func getLocationFromAddress(address: String) -> CLLocationCoordinate2D? {
+        let requsetURL = "https://sgisapi.kostat.go.kr/OpenAPI3/addr/geocode.json?"
+        let fullURL = requsetURL + "accessToken=\(accessToken)&address=\(address)"
+        
+        guard
+        let queryURL = fullURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+        let dict = AddressModule.requestJson(urlStr: queryURL),
+        let result = dict["result"] as? [String:Any],
+        let resultData = result["resultdata"] as? [[String:Any]],
+        let firstData = resultData.first,
+        let xStr = firstData["x"] as? String,
+        let yStr = firstData["y"] as? String,
+        let x = Double(xStr),
+        let y = Double(yStr),
+        let coord = changeCoordUTMToWGS(x: x, y: y)
+        else {return nil}
+        
+        return CLLocationCoordinate2D(latitude: coord.y, longitude: coord.x)
+    }
+    
+    func changeCoordWGSToUTM(coord: CLLocationCoordinate2D) -> (x: Double, y: Double)? {
         let srcCode = 4326
         let dstCode = 5179
+        return changeCoord(srcCode: srcCode, dstCode: dstCode, x: coord.longitude, y: coord.latitude)
+    }
+    
+    func changeCoordUTMToWGS(x: Double, y: Double) -> (x:Double, y:Double)? {
+        let srcCode = 5179
+        let dstCode = 4326
+        return changeCoord(srcCode: srcCode, dstCode: dstCode, x: x, y: y)
+    }
+    
+    private func changeCoord(srcCode: Int, dstCode: Int, x: Double, y: Double) -> (x: Double, y:Double)? {
         let requestURL = "https://sgisapi.kostat.go.kr/OpenAPI3/transformation/transcoord.json?"
-        let fullURL = requestURL + "accessToken=\(accessToken)&src=\(srcCode)&dst=\(dstCode)&posX=\(coord.longitude)&posY=\(coord.latitude)"
+        let fullURL = requestURL + "accessToken=\(accessToken)&src=\(srcCode)&dst=\(dstCode)&posX=\(x)&posY=\(y)"
         guard
-        let dict = AddressModule.requestJson(urlStr: fullURL),
-        let result = dict["result"] as? [String:Any],
-        let x = result["posX"] as? Double,
-        let y = result["posY"] as? Double
-        else {
-            return nil
+            let dict = AddressModule.requestJson(urlStr: fullURL),
+            let result = dict["result"] as? [String:Any],
+            let x = result["posX"] as? Double,
+            let y = result["posY"] as? Double
+            else {
+                return nil
         }
         return (x, y)
     }
@@ -79,3 +109,5 @@ class AddressModule {
         return dict
     }
 }
+
+var addressModule: AddressModule! = AddressModule()

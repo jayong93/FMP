@@ -30,7 +30,6 @@ class SearchPetController: UIViewController, CLLocationManagerDelegate, CityBase
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
     var activityIndicator = UIActivityIndicatorView()
     
-    var addressModule: AddressModule!
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -110,7 +109,7 @@ class SearchPetController: UIViewController, CLLocationManagerDelegate, CityBase
         effectView.removeFromSuperview()
         guard
         let coord = locations.last?.coordinate,
-        let addrData = self.addressModule.getAddressData(coord: coord)
+        let addrData = addressModule.getAddressData(coord: coord)
         else {return}
         
         if let cData = cityData {

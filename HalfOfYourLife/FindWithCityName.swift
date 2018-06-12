@@ -25,7 +25,6 @@ class FindWithCityName: UIViewController, CLLocationManagerDelegate, CityBase {
     var activityIndicator = UIActivityIndicatorView()
     
     var locationManager = CLLocationManager()
-    var addressModule: AddressModule!
     
     override func viewDidLoad() {
         super.viewDidLoad()

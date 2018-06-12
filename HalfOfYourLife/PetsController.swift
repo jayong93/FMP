@@ -89,12 +89,16 @@ class PetsController: UITableViewController, XMLParserDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPetDetail" {
-            if let controller = segue.destination as? PetDetailController {
-                let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
-                controller.petData = petList[indexPath!.row]
+            if let navController = segue.destination as? UINavigationController {
+                if let controller = navController.topViewController as? PetDetailController{
+                    let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+                    controller.petData = petList[indexPath!.row]
+                }
             }
         }
     }
+    
+    @IBAction func doneToPetDetailView(segue: UIStoryboardSegue){}
     
     func search(page: Int) {
         searchWithStatus(page: page, state: "notice")

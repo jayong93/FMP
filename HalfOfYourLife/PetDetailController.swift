@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-
+import MapKit
 /*
  항목명(국문)     항목명(영문)     항목크기     항목구분     샘플데이터     항목설명
  공고종료일     noticeEdt     8     1     20140303     공고종료일 (YYYYMMDD)
@@ -53,6 +53,8 @@ class PetDetailController: UIViewController {
     @IBOutlet var labels: [UILabel]!
     
     var petData: [String:String]!
+    var careName: String?
+    var careAddr: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +120,9 @@ class PetDetailController: UIViewController {
         }
         
         if let careAddr = petData["careAddr"] {
+            self.careAddr = careAddr
             if let careName = petData["careNm"] {
+                self.careName = careName
                 careLabel.text = "\(careName)(\(careAddr)) 에서 보호 중."
             } else {
                 careLabel.text = "\(careAddr) 에서 보호 중."
@@ -139,6 +143,20 @@ class PetDetailController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMapView" {
+            if let controller = segue.destination as? MapViewController {
+                if let careAddr = self.careAddr {
+                    if let coordinate = addressModule.getLocationFromAddress(address: careAddr){
+                        let annotation = MapAnnotation(title: self.careName ?? "", address: careAddr, coordinate: coordinate)
+                        controller.mapAnnotations.append(annotation)
+                        controller.initialLoca = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+                    }
+                }
+            }
+        }
     }
     
 

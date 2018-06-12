@@ -403,7 +403,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="BIN-DJ-A3l" kind="show" identifier="showPetDetail" id="sVe-SH-Bqc"/>
+                                    <segue destination="bVV-Lt-0Xv" kind="show" identifier="showPetDetail" id="sVe-SH-Bqc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -506,6 +506,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eMH-Bs-Dnc"/>
                     </view>
+                    <navigationItem key="navigationItem" id="gjz-aV-vE3">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="IJm-Xa-Xoa">
+                            <connections>
+                                <segue destination="vae-SK-YxE" kind="unwind" unwindAction="doneToPetDetailViewWithSegue:" id="xkG-wY-rMY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="지도 보기" id="zO3-Jz-p8d">
+                            <connections>
+                                <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="RJG-Hb-Yn5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="uCZ-vO-xqo" id="24i-MQ-70I"/>
                         <outlet property="careLabel" destination="Y1S-pm-YUx" id="I45-x0-3Ph"/>
@@ -525,8 +537,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbx-oZ-aQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="vae-SK-YxE" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2738" y="1030"/>
+            <point key="canvasLocation" x="3644.9275362318845" y="1029.6195652173915"/>
         </scene>
         <!--병원-->
         <scene sceneID="dRo-KP-MAY">
@@ -793,6 +806,24 @@
             </objects>
             <point key="canvasLocation" x="1830" y="289"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MnN-nv-K59">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bVV-Lt-0Xv" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xjp-s9-J7m">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BIN-DJ-A3l" kind="relationship" relationship="rootViewController" id="uhe-gs-C6e"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L7x-JY-CRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2737.68115942029" y="1029.6195652173915"/>
+        </scene>
     </scenes>
     <resources>
         <image name="동물.png" width="24" height="24"/>
@@ -800,6 +831,6 @@
         <image name="약국.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MWl-P7-hEE"/>
+        <segue reference="RJG-Hb-Yn5"/>
     </inferredMetricsTieBreakers>
 </document>
