@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class FindWithCityName: UIViewController, CityBase {
+class FindWithCityName: UIViewController, CLLocationManagerDelegate, CityBase {
     @IBOutlet var cityName: UITextField!
     @IBOutlet var searchButton: UIButton!
     @IBOutlet var tableView: UITableView!
@@ -24,12 +24,18 @@ class FindWithCityName: UIViewController, CityBase {
     let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
     var activityIndicator = UIActivityIndicatorView()
     
+    var locationManager = CLLocationManager()
+    var addressModule: AddressModule!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if false == checkCanSearch() {
             searchButton.isEnabled = false
         }
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         medicalController = MedicalController(tableView: self.tableView)
         
@@ -68,21 +74,58 @@ class FindWithCityName: UIViewController, CityBase {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func search(_ sender: UIButton!) {
+    @IBAction func getCurrLocation(_ sender: UIBarButtonItem) {
+        locationManager.requestWhenInUseAuthorization()
         showWaitIcon()
-        medicalController.cityName = cityName.text
-        medicalController.clearData()
-        medicalController.search(page: medicalController.currPage)
-        if medicalController.hospitalList.isEmpty {
-            showMapButton.isEnabled = false
-        } else {
-            showMapButton.isEnabled = true
+        locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        effectView.removeFromSuperview()
+        guard
+            let coord = locations.last?.coordinate,
+            let addrData = addressModule.getAddressData(coord: coord)
+        else {
+            return
         }
+        
+        if addrData.sidoName != "경기도" {return}
+        
+        if let tData = townData {
+            if let idx = tData.towns.index(where: {t in return t.name == addrData.sigunguName }) {
+                tData.selectedRow = idx
+                townSelected(index: idx)
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        effectView.removeFromSuperview()
+        let alert = UIAlertController(title: "오류", message: "지원되지 않는 지역입니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func search(_ sender: UIButton!) {
+        searchButton.isEnabled = false
+        showWaitIcon()
         DispatchQueue.main.async {
-            self.effectView.removeFromSuperview()
+            self.medicalController.cityName = self.cityName.text
+            self.medicalController.clearData()
+            self.medicalController.search(page: self.medicalController.currPage)
+            if self.medicalController.hospitalList.isEmpty {
+                self.showMapButton.isEnabled = false
+            } else {
+                self.showMapButton.isEnabled = true
+            }
+            DispatchQueue.main.async {
+                self.effectView.removeFromSuperview()
+                self.searchButton.isEnabled = true
+                self.tableView.reloadData()
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
         }
-        tableView.reloadData()
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -162,9 +205,10 @@ class FindWithCityName: UIViewController, CityBase {
     func showWaitIcon() {
         effectView.frame = CGRect(x: self.view.center.x - 25, y: self.view.center.y-25, width: 50, height: 50)
         effectView.layer.masksToBounds = true
+        effectView.layer.cornerRadius = 15
         
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.startAnimating()
         
         effectView.contentView.addSubview(activityIndicator)

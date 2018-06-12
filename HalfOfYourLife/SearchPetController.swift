@@ -8,8 +8,9 @@
 
 import UIKit
 import Foundation
+import CoreLocation
 
-class SearchPetController: UIViewController, CityBase {
+class SearchPetController: UIViewController, CLLocationManagerDelegate, CityBase {
     
     @IBOutlet var cityListView: UITextField!
     @IBOutlet var townListView: UITextField!
@@ -26,8 +27,17 @@ class SearchPetController: UIViewController, CityBase {
     let startDatePicker = UIDatePicker()
     let endDatePicker = UIDatePicker()
     
+    let effectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+    var activityIndicator = UIActivityIndicatorView()
+    
+    var addressModule: AddressModule!
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         setBackground(path: "pet_background.png")
 
@@ -88,6 +98,41 @@ class SearchPetController: UIViewController, CityBase {
                 }
             }
         }
+    }
+    
+    @IBAction func getCurrLocation(_ sender: UIBarButtonItem) {
+        locationManager.requestWhenInUseAuthorization()
+        showWaitIcon()
+        locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        effectView.removeFromSuperview()
+        guard
+        let coord = locations.last?.coordinate,
+        let addrData = self.addressModule.getAddressData(coord: coord)
+        else {return}
+        
+        if let cData = cityData {
+            if let idx = cities.index(where: {city in return city.name == addrData.sidoName}) {
+                cData.selectedRow = idx
+                citySelected(index: idx)
+            }
+        }
+        if let tData = townData {
+            if let idx = tData.towns.index(where: {town in return town.name == addrData.sigunguName}) {
+                tData.selectedRow = idx
+                townSelected(index: idx)
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        effectView.removeFromSuperview()
+        let alert = UIAlertController(title: "오류", message: "지원되지 않는 지역입니다.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func getAPIKey() -> String? {
@@ -172,5 +217,18 @@ class SearchPetController: UIViewController, CityBase {
             self.view.addSubview(imgView)
             self.view.sendSubview(toBack: imgView)
         }
+    }
+    
+    func showWaitIcon() {
+        effectView.frame = CGRect(x: self.view.center.x - 25, y: self.view.center.y-25, width: 50, height: 50)
+        effectView.layer.masksToBounds = true
+        effectView.layer.cornerRadius = 15
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.startAnimating()
+        
+        effectView.contentView.addSubview(activityIndicator)
+        self.view.addSubview(effectView)
     }
 }

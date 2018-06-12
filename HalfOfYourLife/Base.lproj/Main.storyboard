@@ -95,6 +95,11 @@
                         <viewLayoutGuide key="safeArea" id="6et-Yf-BR0"/>
                     </view>
                     <navigationItem key="navigationItem" title="동물 약국" id="70L-hd-bpX">
+                        <barButtonItem key="leftBarButtonItem" title="현재 위치" id="t4B-ql-XEP">
+                            <connections>
+                                <action selector="getCurrLocation:" destination="nkp-2r-bb3" id="OAl-ED-BBa"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="지도 보기" id="0K8-7r-Pwc">
                             <connections>
                                 <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="iYt-FA-aCT"/>
@@ -341,7 +346,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Inn-0B-EQ2"/>
                     </view>
-                    <navigationItem key="navigationItem" title="유기동물 찾기" id="Ar1-sS-Pyb"/>
+                    <navigationItem key="navigationItem" title="유기동물 찾기" id="Ar1-sS-Pyb">
+                        <barButtonItem key="leftBarButtonItem" title="현재 위치" id="gfN-ci-qzm">
+                            <connections>
+                                <action selector="getCurrLocation:" destination="3ML-k8-qZY" id="GbS-jb-qUM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cityListView" destination="xvx-5o-BdM" id="J6L-vb-dmX"/>
                         <outlet property="searchBtn" destination="CBs-bt-Tu3" id="moX-rZ-oPq"/>
@@ -724,6 +735,11 @@
                         <viewLayoutGuide key="safeArea" id="L9h-AD-i6S"/>
                     </view>
                     <navigationItem key="navigationItem" title="동물 병원" id="BFd-6r-QZe">
+                        <barButtonItem key="leftBarButtonItem" title="현재 위치" id="Nbd-sZ-JW3">
+                            <connections>
+                                <action selector="getCurrLocation:" destination="fxc-QI-VbU" id="hnB-W1-Kew"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="지도 보기" id="qvt-gq-Ll4">
                             <connections>
                                 <segue destination="san-Yz-Q7A" kind="show" identifier="showMapView" id="MWl-P7-hEE"/>
@@ -784,6 +800,6 @@
         <image name="약국.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iYt-FA-aCT"/>
+        <segue reference="MWl-P7-hEE"/>
     </inferredMetricsTieBreakers>
 </document>

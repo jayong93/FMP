@@ -12,6 +12,7 @@ class MainController: UITabBarController {
     private let baseURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/"
     private var apiKey: String?
     private var locaData: [City] = []
+    private var addrModule: AddressModule!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,10 @@ class MainController: UITabBarController {
                 }
             }
             
+            if let addrModule = AddressModule() {
+                self.addrModule = addrModule
+            }
+            
             if let views = viewControllers {
                 let navs = views.map({view in return view as! UINavigationController})
                 let hospitalView = navs[0].topViewController as! FindWithCityName
@@ -37,6 +42,9 @@ class MainController: UITabBarController {
                 hospitalView.cities = locaData
                 pharmacyView.cities = locaData
                 petView.cities = locaData
+                hospitalView.addressModule = self.addrModule
+                pharmacyView.addressModule = self.addrModule
+                petView.addressModule = self.addrModule
             }
         }
     }
