@@ -14,6 +14,7 @@ class FindWithCityName: UIViewController, CLLocationManagerDelegate, CityBase {
     @IBOutlet var searchButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var showMapButton: UIBarButtonItem!
+    @IBOutlet var getLocationButton: UIBarButtonItem!
     
     var cities: [City]!
     var cityData: CityListData?
@@ -75,12 +76,16 @@ class FindWithCityName: UIViewController, CLLocationManagerDelegate, CityBase {
     
     @IBAction func getCurrLocation(_ sender: UIBarButtonItem) {
         locationManager.requestWhenInUseAuthorization()
+        getLocationButton.isEnabled = false
+        searchButton.isEnabled = false
         showWaitIcon()
         locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         effectView.removeFromSuperview()
+        searchButton.isEnabled = true
+        getLocationButton.isEnabled = true
         guard
             let coord = locations.last?.coordinate,
             let addrData = addressModule.getAddressData(coord: coord)
@@ -100,7 +105,9 @@ class FindWithCityName: UIViewController, CLLocationManagerDelegate, CityBase {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         effectView.removeFromSuperview()
-        let alert = UIAlertController(title: "오류", message: "지원되지 않는 지역입니다.", preferredStyle: .alert)
+        searchButton.isEnabled = true
+        getLocationButton.isEnabled = true
+        let alert = UIAlertController(title: "오류", message: "위치 정보를 가져올 수 없습니다.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)

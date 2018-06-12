@@ -17,6 +17,8 @@ class SearchPetController: UIViewController, CLLocationManagerDelegate, CityBase
     @IBOutlet var searchStartDate: UITextField!
     @IBOutlet var searchEndDate: UITextField!
     @IBOutlet var searchBtn: UIButton!
+    @IBOutlet var getLocationButton: UIBarButtonItem!
+    
     var apiKey = ""
     let baseURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/"
     var cities: [City]!
@@ -101,12 +103,16 @@ class SearchPetController: UIViewController, CLLocationManagerDelegate, CityBase
     
     @IBAction func getCurrLocation(_ sender: UIBarButtonItem) {
         locationManager.requestWhenInUseAuthorization()
+        getLocationButton.isEnabled = false
+        searchBtn.isEnabled = false
         showWaitIcon()
         locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         effectView.removeFromSuperview()
+        getLocationButton.isEnabled = true
+        searchBtn.isEnabled = true
         guard
         let coord = locations.last?.coordinate,
         let addrData = addressModule.getAddressData(coord: coord)
@@ -128,7 +134,9 @@ class SearchPetController: UIViewController, CLLocationManagerDelegate, CityBase
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         effectView.removeFromSuperview()
-        let alert = UIAlertController(title: "오류", message: "지원되지 않는 지역입니다.", preferredStyle: .alert)
+        getLocationButton.isEnabled = true
+        searchBtn.isEnabled = true
+        let alert = UIAlertController(title: "오류", message: "위치 정보를 가져올 수 없습니다.", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)

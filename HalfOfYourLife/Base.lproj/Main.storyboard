@@ -108,6 +108,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cityName" destination="N9l-af-amE" id="izN-M0-WwU"/>
+                        <outlet property="getLocationButton" destination="t4B-ql-XEP" id="ZC8-ru-cHv"/>
                         <outlet property="searchButton" destination="EEE-Im-plp" id="YMA-eC-1Ja"/>
                         <outlet property="showMapButton" destination="0K8-7r-Pwc" id="zjv-y2-Dyz"/>
                         <outlet property="tableView" destination="9yU-Bs-Zw6" id="xhY-z3-rmb"/>
@@ -355,6 +356,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cityListView" destination="xvx-5o-BdM" id="J6L-vb-dmX"/>
+                        <outlet property="getLocationButton" destination="gfN-ci-qzm" id="yYL-rw-Baw"/>
                         <outlet property="searchBtn" destination="CBs-bt-Tu3" id="moX-rZ-oPq"/>
                         <outlet property="searchEndDate" destination="4zn-dp-sGG" id="kzA-oj-9k1"/>
                         <outlet property="searchStartDate" destination="una-bY-Y9L" id="GEN-Co-KsM"/>
@@ -761,6 +763,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cityName" destination="neT-HT-ERP" id="Hpo-SW-1ET"/>
+                        <outlet property="getLocationButton" destination="Nbd-sZ-JW3" id="d1d-LG-skU"/>
                         <outlet property="searchButton" destination="2VA-KV-GvT" id="EYB-3c-Icb"/>
                         <outlet property="showMapButton" destination="qvt-gq-Ll4" id="B9S-tU-rxt"/>
                         <outlet property="tableView" destination="RBC-hv-wvN" id="KTG-M6-bEd"/>
@@ -831,6 +834,6 @@
         <image name="약국.png" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RJG-Hb-Yn5"/>
+        <segue reference="iYt-FA-aCT"/>
     </inferredMetricsTieBreakers>
 </document>
